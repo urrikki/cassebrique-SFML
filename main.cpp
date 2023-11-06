@@ -7,7 +7,7 @@ gameObject mygame;
 
 int main()
 {
-    RenderWindow window(VideoMode(200, 200), "SFML works!");
+    RenderWindow window(VideoMode(1280, 720), "SFML works!");
     
 
     while (window.isOpen())

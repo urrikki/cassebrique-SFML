@@ -6,14 +6,17 @@ gameObject::gameObject()
     h = 0;
     x = 0;
     y = 0;
-    size = 10;
+    size = 100;
     Color m_color = Color::White;
+
+    square.setPosition(x, y);
+    square.setFillColor(m_color);
     square.setSize(sf::Vector2f(size, size));
 }
 
 void gameObject::setPosition(int x, int y)
 {
-    x,y = x, y;
+    x, y = x, y;
     square.setPosition(x, y);
 };
 
@@ -38,7 +41,16 @@ Color gameObject::getColor()
     return m_color;
 }
 
+void gameObject::setSize(int size)
+{
+    size = size;
+    square.setSize(sf::Vector2f(size, size));
+};
 
+int gameObject::getSize()
+{
+    return size;
+};
 
 void gameObject::drawSquare(RenderWindow& window)
 { 
