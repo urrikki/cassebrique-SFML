@@ -1,12 +1,14 @@
 #include <SFML/Graphics.hpp>
+#include "gameObject.h"
 
 using namespace sf;
+
+gameObject mygame;
 
 int main()
 {
     RenderWindow window(VideoMode(200, 200), "SFML works!");
-    CircleShape shape(100.f);
-    shape.setFillColor(Color::Green);
+    
 
     while (window.isOpen())
     {
@@ -18,7 +20,7 @@ int main()
         }
 
         window.clear();
-        window.draw(shape);
+        mygame.drawSquare(window);
         window.display();
     }
 

@@ -8,11 +8,13 @@ gameObject::gameObject()
     y = 0;
     size = 10;
     Color m_color = Color::White;
+    square.setSize(sf::Vector2f(size, size));
 }
 
-int gameObject::setPosition(int x, int y)
+void gameObject::setPosition(int x, int y)
 {
-    return x, y;
+    x,y = x, y;
+    square.setPosition(x, y);
 };
 
 int gameObject::getX()
@@ -28,6 +30,7 @@ int gameObject::getY()
 void gameObject::setColor(Color color)
 {
     m_color = color;
+    square.setFillColor(color);
 };
 
 Color gameObject::getColor()
@@ -35,29 +38,13 @@ Color gameObject::getColor()
     return m_color;
 }
 
-void gameObject::draw()
-{
 
+
+void gameObject::drawSquare(RenderWindow& window)
+{ 
+    window.draw(square);
 };
 
-bool gameObject::AABB(const gameObject object)
-{
-    // xmin = x and xmax = x + size
-    // ymin = y and ymax = y + size
-
-    if (
-        /*verif pour x*/(x <= (object.x + object.size) && x <= (object.x) || x + size >= (object.x + object.size) && x + size <= (object.x))
-        &&
-        /*verif pour y*/ (y <= (object.y + object.size) && y <= (object.y) || y + size >= (object.y + object.size) && x + size <= (object.y))
-        )
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
-};
 
 float distance(float pointX, float pointY, float opointX, float opointY)
 {

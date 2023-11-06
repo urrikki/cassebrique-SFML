@@ -26,9 +26,11 @@ public:
     int y;
     int size;
 
+    RectangleShape square;
+
     Color m_color;
 
-    int setPosition(int x, int y);
+    void setPosition(int x, int y);
     int getX();
     int getY();
 
@@ -36,9 +38,7 @@ public:
 
     Color getColor();
 
-    void draw();
-
-    bool AABB(const gameObject object);
+    void drawSquare(RenderWindow& window);
 
     CollideSide getCollideSide(const gameObject object);
 
