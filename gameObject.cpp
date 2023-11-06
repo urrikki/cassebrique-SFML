@@ -74,7 +74,8 @@ struct distanceResult {
     distanceResult(const std::string& n, float v) : name(n), value(v) {}
 };
 
-int gameObject::AABBside(const gameObject object) {
+
+CollideSide gameObject::getCollideSide(const gameObject object) {
     // xmin = x et xmax = x + size
     // ymin = y et ymax = y + size
 
@@ -132,18 +133,18 @@ int gameObject::AABBside(const gameObject object) {
         }
 
         if (testDistance == "rtol") {
-            return 1;
+            return Right;
         }
         else if (testDistance == "ltor") {
-            return 2;
+            return Left;
         }
         else if (testDistance == "ttob") {
-            return 3;
+            return Top;
         }
         else if (testDistance == "btot") {
-            return 4;
+            return Bottom;
         }
     }
-    return 0;
+    return None;
 }
 

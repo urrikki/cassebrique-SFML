@@ -5,6 +5,15 @@
 
 using namespace sf;
 
+typedef enum CollideSide
+{
+    None,
+    Right,
+    Left,
+    Top,
+    Bottom,
+};
+
 class gameObject
 {
 
@@ -31,6 +40,6 @@ public:
 
     bool AABB(const gameObject object);
 
-    int AABBside(const gameObject object);
+    CollideSide getCollideSide(const gameObject object);
 
 };
