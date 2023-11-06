@@ -5,4 +5,6 @@ class Ball : public gameObject
 {
 public:
     Ball();
+
+    void initBall();
 };
