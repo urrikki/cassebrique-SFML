@@ -8,4 +8,5 @@ public:
 
     int life;
 
+    void oneBrick();
 };

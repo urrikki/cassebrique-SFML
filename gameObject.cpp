@@ -16,7 +16,8 @@ gameObject::gameObject()
 
 void gameObject::setPosition(int x, int y)
 {
-    x, y = x, y;
+    x = x;
+    y = y;
     square.setPosition(x, y);
 };
 

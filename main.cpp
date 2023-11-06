@@ -1,14 +1,14 @@
 #include <SFML/Graphics.hpp>
-#include "gameObject.h"
+#include "brick.h"
 
 using namespace sf;
 
-gameObject mygame;
+Brick myBrick;
 
 int main()
 {
     RenderWindow window(VideoMode(1280, 720), "SFML works!");
-    
+    myBrick.oneBrick();
 
     while (window.isOpen())
     {
@@ -20,7 +20,7 @@ int main()
         }
 
         window.clear();
-        mygame.drawSquare(window);
+        myBrick.drawSquare(window);
         window.display();
     }
 
