@@ -34,8 +34,10 @@ public:
     int getX();
     int getY();
 
-    void setColor(Color color);
+    void setSize(int size);
+    int getSize();
 
+    void setColor(Color color);
     Color getColor();
 
     void drawSquare(RenderWindow& window);
