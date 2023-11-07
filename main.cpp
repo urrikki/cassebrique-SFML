@@ -9,8 +9,16 @@ Ball myBall;
 
 int main()
 {
+    {
+        int i = 0;
+    }
+    
+    int* pi = new int;
+    *pi = 0;
+    delete pi;
+
     RenderWindow window(VideoMode(1280, 720), "SFML works!");
-    myBrick.oneBrick();
+    myBrick.initBrick();
     myBall.initBall();
 
     while (window.isOpen())
@@ -23,8 +31,8 @@ int main()
         }
 
         window.clear();
-        myBrick.drawSquare(window);
-        myBall.drawSquare(window);
+        myBrick.drawShape(window);
+        myBall.drawShape(window);
         window.display();
     }
 

@@ -11,6 +11,6 @@ Ball::Ball()
 void Ball::initBall()
 {
     setPosition(640, 600);
-    setColor(Color::Cyan);
+    setColor(Color::Blue);
     setSize(25);
 };

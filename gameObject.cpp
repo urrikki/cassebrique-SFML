@@ -6,19 +6,40 @@ gameObject::gameObject()
     h = 0;
     x = 0;
     y = 0;
-    size = 100;
     Color m_color = Color::White;
 
-    square.setPosition(x, y);
-    square.setFillColor(m_color);
-    square.setSize(sf::Vector2f(size, size));
+    shape = new RectangleShape(sf::Vector2f(w, h));
+    shape->setPosition(x, y);
+    shape->setFillColor(m_color);
 }
+
+gameObject::gameObject(): isRectangle (false)
+{
+    r = 0;
+    x = 0;
+    y = 0;
+    Color m_color = Color::White;
+
+    shape = new CircleShape(r);
+    shape->setPosition(x, y);
+    shape->setFillColor(m_color);
+}
+
+
+//void Init() 
+//{
+//    w = 0;
+//    h = 0;
+//    x = 0;
+//    y = 0;
+//}
+
 
 void gameObject::setPosition(int x, int y)
 {
     x = x;
     y = y;
-    square.setPosition(x, y);
+    shape->setPosition(x, y);
 };
 
 int gameObject::getX()
@@ -34,7 +55,7 @@ int gameObject::getY()
 void gameObject::setColor(Color color)
 {
     m_color = color;
-    square.setFillColor(color);
+    shape->setFillColor(color);
 };
 
 Color gameObject::getColor()
@@ -42,10 +63,10 @@ Color gameObject::getColor()
     return m_color;
 }
 
-void gameObject::setSize(int size)
+void gameObject::setSize(int w, int h)
 {
-    size = size;
-    square.setSize(sf::Vector2f(size, size));
+    w = w;
+    h = h;
 };
 
 int gameObject::getSize()
@@ -53,9 +74,9 @@ int gameObject::getSize()
     return size;
 };
 
-void gameObject::drawSquare(RenderWindow& window)
+void gameObject::drawShape(RenderWindow& window)
 { 
-    window.draw(square);
+    window.draw(shape);
 };
 
 

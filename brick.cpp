@@ -8,9 +8,9 @@ Brick::Brick()
     life = 100;
 };
 
-void Brick::oneBrick()
+void Brick::initBrick()
 {
     setPosition(640, 360);
-    setColor(Color::Blue);
+    setColor(Color::Cyan);
     setSize(25);
 };
