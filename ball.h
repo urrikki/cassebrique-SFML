@@ -6,7 +6,14 @@ class Ball : public gameObject
 public:
     Ball();
 
+    float orientationX;
+    float orientationY;
+
+    void setOrientation(float x, float y);
+
     void initBall();
 
-    void moveBall(float elapsedTime , CollideSide side);
+    void moveBallT(float elapsedTimeF);
+
+    void rebound(CollideSide side);
 };

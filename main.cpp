@@ -17,6 +17,7 @@ int main()
 
     float elaspedTimeF = 0.f;
     Clock clock;
+    myBall.setOrientation(0.0, -75.0);
     while (window.isOpen())
     {
         Event event;
@@ -30,7 +31,8 @@ int main()
         myBrick.drawSquare(window);
         myBall.drawSquare(window);
         
-        myBall.moveBall(elaspedTimeF , myBall.getCollideSide(myBrick));
+        myBall.moveBallT(elaspedTimeF);
+        myBall.rebound(myBall.getCollideSide(myBrick));
    
         window.display();
 
