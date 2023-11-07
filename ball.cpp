@@ -3,40 +3,33 @@
 
 using namespace sf;
 
-Ball::Ball(){};
+Ball::Ball() : gameObject(0)
+{};
 
 void Ball::initBall()
 {
     setPosition(640, 600);
-    setColor(Color::Cyan);
-    setSize(25);
-    float orientationX = 0.0;
-    float orientationY = 0.0;
+    setColor(Color::Blue);
 };
 
-void Ball::setOrientation(float x , float y)
+void Ball::moveBall(float elapsedTimeF , CollideSide side)
 {
-    this->orientationX = x;
-    this->orientationY = y;
-
-}
-
-void Ball::moveBallT(float elapsedTimeF)
-{
-    setPosition(x + (elapsedTimeF * orientationX), y + (elapsedTimeF * orientationY));
-}
-
-void Ball::rebound(CollideSide side)
-{
-    if (side == CollideSide::Bottom || side == CollideSide::Top)
+    float movement = 50.f * elapsedTimeF;
+    if (side == CollideSide::None || side == CollideSide::Bottom)
     {
-        this->orientationY = orientationY * -1;
+        setPosition(x, y - movement);
     }
-    else if (side == CollideSide::Right || side == CollideSide::Left)
+    else if (side == CollideSide::Top )
     {
-        this->orientationX = orientationX * -1;
+        setPosition(x, y + movement);
+    }
+    else if (side == CollideSide::Right )
+    {
+        setPosition(x + movement, y);
+    }
+    else if (side == CollideSide::Left )
+    {
+        setPosition(x - movement , y);
     }
     
 }
-
-
