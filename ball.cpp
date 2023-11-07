@@ -3,10 +3,7 @@
 
 using namespace sf;
 
-Ball::Ball()
-{
-
-};
+Ball::Ball(){};
 
 void Ball::initBall()
 {
@@ -14,3 +11,27 @@ void Ball::initBall()
     setColor(Color::Blue);
     setSize(25);
 };
+
+void Ball::moveBall(float elapsedTimeF , CollideSide side)
+{
+    float movement = 50.f * elapsedTimeF;
+    if (side == CollideSide::None || side == CollideSide::Bottom)
+    {
+        setPosition(x, y - movement);
+    }
+    else if (side == CollideSide::Top )
+    {
+        setPosition(x, y + movement);
+    }
+    else if (side == CollideSide::Right )
+    {
+        setPosition(x + movement, y);
+    }
+    else if (side == CollideSide::Left )
+    {
+        setPosition(x - movement , y);
+    }
+    
+}
+
+

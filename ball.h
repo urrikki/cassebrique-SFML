@@ -7,4 +7,6 @@ public:
     Ball();
 
     void initBall();
+
+    void moveBall(float elapsedTime , CollideSide side);
 };

@@ -34,7 +34,7 @@ public:
 
     Color m_color;
 
-    void setPosition(int x, int y);
+    void setPosition(float x, float y);
     int getX();
     int getY();
 
@@ -46,6 +46,6 @@ public:
 
     void drawShape(RenderWindow& window);
 
-    CollideSide getCollideSide(const gameObject object);
+    CollideSide getCollideSide(gameObject object);
 
 };
