@@ -6,19 +6,41 @@ gameObject::gameObject()
     h = 0;
     x = 0;
     y = 0;
-    size = 100;
     Color m_color = Color::White;
 
-    square.setPosition(x, y);
-    square.setFillColor(m_color);
-    square.setSize(sf::Vector2f(size, size));
+    shape = new RectangleShape(sf::Vector2f(w, h));
+    shape->setPosition(x, y);
+    shape->setFillColor(m_color);
 }
+
+
+gameObject::gameObject(): isRectangle (false)
+{
+    r = 0;
+    x = 0;
+    y = 0;
+    Color m_color = Color::White;
+
+    shape = new CircleShape(r);
+    shape->setPosition(x, y);
+    shape->setFillColor(m_color);
+}
+
+
+//void Init() 
+//{
+//    w = 0;
+//    h = 0;
+//    x = 0;
+//    y = 0;
+//}
+
 
 void gameObject::setPosition(float x, float y)
 {
     this->x = x;
     this->y = y;
-    square.setPosition(x, y);
+    square->setPosition(x, y);
 };
 
 int gameObject::getX()
@@ -34,7 +56,7 @@ int gameObject::getY()
 void gameObject::setColor(Color color)
 {
     m_color = color;
-    square.setFillColor(color);
+    shape->setFillColor(color);
 };
 
 Color gameObject::getColor()
@@ -42,10 +64,11 @@ Color gameObject::getColor()
     return m_color;
 }
 
-void gameObject::setSize(int size)
+void gameObject::setSize(int w, int h)
 {
-    this->size = size;
-    square.setSize(sf::Vector2f(size, size));
+    this->w = w;
+    this->h = w;
+    square->setSize(sf::Vector2f(w, h));
 };
 
 int gameObject::getSize()
@@ -53,9 +76,9 @@ int gameObject::getSize()
     return size;
 };
 
-void gameObject::drawSquare(RenderWindow& window)
+void gameObject::drawShape(RenderWindow& window)
 { 
-    window.draw(square);
+    window.draw(shape);
 };
 
 
@@ -82,7 +105,7 @@ CollideSide gameObject::getCollideSide(gameObject objectTest) {
     int x = getX();
     int y = getY();
 
-    // On calcule un point au milieu de chaque longueur du carré 
+    // On calcule un point au milieu de chaque longueur du carrÃ© 
     float lpointX = this->x;
     float lpointY = this->y + size / 2;
 
@@ -116,7 +139,7 @@ CollideSide gameObject::getCollideSide(gameObject objectTest) {
         )
     {
 
-        // Stock résultats dans la structure
+        // Stock rÃ©sultats dans la structure
         distanceResult results[] = {
             distanceResult("rtol", distance(rpointX , rpointY , olpointX , olpointY)),
             distanceResult("ltor", distance(lpointX , lpointY , orpointX , orpointY)),

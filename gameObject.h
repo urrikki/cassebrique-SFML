@@ -22,11 +22,15 @@ public:
 
     int w;
     int h;
-    float x;
-    float y;
+    int r;
+    int x;
+    int y;
     int size;
+    int radius;
 
-    RectangleShape square;
+    Shape* shape;
+
+    bool isRectangle;
 
     Color m_color;
 
@@ -34,13 +38,13 @@ public:
     int getX();
     int getY();
 
-    void setSize(int size);
+    void setSize(int w, int h);
     int getSize();
 
     void setColor(Color color);
     Color getColor();
 
-    void drawSquare(RenderWindow& window);
+    void drawShape(RenderWindow& window);
 
     CollideSide getCollideSide(gameObject object);
 
