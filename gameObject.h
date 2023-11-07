@@ -18,29 +18,35 @@ class gameObject
 {
 
 public:
-    gameObject();
+    gameObject(int w, int h);
+    gameObject(int r);
 
     int w;
     int h;
-    float x;
-    float y;
+    int r;
+    int x;
+    int y;
     int size;
+    int radius;
 
-    RectangleShape square;
+    Shape* shape;
+
+    bool isRectangle;
 
     Color m_color;
 
     void setPosition(float x, float y);
-    int getX();
-    int getY();
+    float getX();
+    float getY();
 
-    void setSize(int size);
-    int getSize();
+    int getWidth();
+    int getHeight();
+    int getRadius();
 
     void setColor(Color color);
     Color getColor();
 
-    void drawSquare(RenderWindow& window);
+    void drawShape(RenderWindow& window);
 
     CollideSide getCollideSide(gameObject object);
 
