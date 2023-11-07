@@ -14,10 +14,10 @@ gameObject::gameObject()
     square.setSize(sf::Vector2f(size, size));
 }
 
-void gameObject::setPosition(int x, int y)
+void gameObject::setPosition(float x, float y)
 {
-    x = x;
-    y = y;
+    this->x = x;
+    this->y = y;
     square.setPosition(x, y);
 };
 
@@ -44,7 +44,7 @@ Color gameObject::getColor()
 
 void gameObject::setSize(int size)
 {
-    size = size;
+    this->size = size;
     square.setSize(sf::Vector2f(size, size));
 };
 
@@ -75,41 +75,44 @@ struct distanceResult {
 };
 
 
-CollideSide gameObject::getCollideSide(const gameObject object) {
+CollideSide gameObject::getCollideSide(gameObject objectTest) {
     // xmin = x et xmax = x + size
     // ymin = y et ymax = y + size
 
+    int x = getX();
+    int y = getY();
+
     // On calcule un point au milieu de chaque longueur du carré 
-    float lpointX = x;
-    float lpointY = y + size / 2;
+    float lpointX = this->x;
+    float lpointY = this->y + size / 2;
 
-    float rpointX = x + size;
-    float rpointY = y + size / 2;
+    float rpointX = this->x + size;
+    float rpointY = this->y + size / 2;
 
-    float tpointX = x + size / 2;
-    float tpointY = y;
+    float tpointX = this->x + size / 2;
+    float tpointY = this->y;
 
-    float bpointX = x + size / 2;
-    float bpointY = y + size;
+    float bpointX = this->x + size / 2;
+    float bpointY = this->y + size;
 
     // Pareil pour les objets 
 
-    float olpointX = x;
-    float olpointY = y + size / 2;
+    float olpointX = objectTest.x;
+    float olpointY = objectTest.y + objectTest.size / 2;
 
-    float orpointX = x + size;
-    float orpointY = y + size / 2;
+    float orpointX = objectTest.x + objectTest.size;
+    float orpointY = objectTest.y + objectTest.size / 2;
 
-    float otpointX = x + size / 2;
-    float otpointY = y;
+    float otpointX = objectTest.x + objectTest.size / 2;
+    float otpointY = objectTest.y;
 
-    float obpointX = x + size / 2;
-    float obpointY = y + size;
+    float obpointX = objectTest.x + objectTest.size / 2;
+    float obpointY = objectTest.y + objectTest.size;
 
     if (
-        /*verif pour x*/(x <= (object.x + object.size) && x <= (object.x) || x + size >= (object.x + object.size) && x + size <= (object.x))
+        /*verif pour x*/(x <= (objectTest.x + objectTest.size) || x + size <= objectTest.x  )
         &&
-        /*verif pour y*/ (y <= (object.y + object.size) && y <= (object.y) || y + size >= (object.y + object.size) && x + size <= (object.y))
+        /*verif pour y*/ (y <= (objectTest.y + objectTest.size) || y + size <= objectTest.y )
         )
     {
 

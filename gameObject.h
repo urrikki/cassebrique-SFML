@@ -22,15 +22,15 @@ public:
 
     int w;
     int h;
-    int x;
-    int y;
+    float x;
+    float y;
     int size;
 
     RectangleShape square;
 
     Color m_color;
 
-    void setPosition(int x, int y);
+    void setPosition(float x, float y);
     int getX();
     int getY();
 
@@ -42,6 +42,6 @@ public:
 
     void drawSquare(RenderWindow& window);
 
-    CollideSide getCollideSide(const gameObject object);
+    CollideSide getCollideSide(gameObject object);
 
 };
