@@ -10,14 +10,14 @@ Ball myBall;
 
 int main()
 {
+
     RenderWindow window(VideoMode(1280, 720), "SFML works!");
-    myBrick.oneBrick();
+    myBrick.initBrick();
     myBall.initBall();
     Time frameTime = seconds(1.0f / 60.0f);
 
     float elaspedTimeF = 0.f;
     Clock clock;
-    myBall.setOrientation(0.0, -75.0);
     while (window.isOpen())
     {
         Event event;
@@ -28,12 +28,11 @@ int main()
         }
 
         window.clear();
-        myBrick.drawSquare(window);
-        myBall.drawSquare(window);
+        myBrick.drawShape(window);
+        myBall.drawShape(window);
         
-        myBall.moveBallT(elaspedTimeF);
-        myBall.rebound(myBall.getCollideSide(myBrick));
-   
+        myBall.moveBall(elaspedTimeF , myBall.getCollideSide(myBrick));
+ 
         window.display();
 
 
