@@ -8,9 +8,8 @@ Brick::Brick() : gameObject(80,30)
     life = 100;
 };
 
-void Brick::oneBrick()
+void Brick::initBrick()
 {
     setPosition(640, 360);
-    setColor(Color::Blue);
-    setSize(25);
+    setColor(Color::Cyan);
 };

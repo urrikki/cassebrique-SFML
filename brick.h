@@ -8,5 +8,5 @@ public:
 
     int life;
 
-    void oneBrick();
+    void initBrick();
 };
