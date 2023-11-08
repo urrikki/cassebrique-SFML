@@ -6,11 +6,20 @@ gameObject::gameObject(int w, int h)
     this->h = h;
     x = 0;
     y = 0;
+    shapeType = NoShape;
     orientationX = 0;
     orientationY = 0;
     Color m_color = Color::White;
 
     shape = new RectangleShape(sf::Vector2f(w, h));
+    if (w == h)
+    {
+        shapeType = Square;
+    }
+    else
+    {
+        shapeType = Rectangle;
+    }
     shape->setPosition(x, y);
     shape->setFillColor(m_color);
 }
@@ -23,6 +32,7 @@ gameObject::gameObject(int r)
     this->r = r;
     orientationX = 0;
     orientationY = 0;
+    shapeType = Circle;
     Color m_color = Color::White;
 
     shape = new CircleShape(r);
@@ -90,6 +100,11 @@ void gameObject::drawShape(RenderWindow& window)
     window.draw(*shape);
 };
 
+ShapeType gameObject::getShapeType()
+{
+    return shapeType;
+}
+
 
 float distance(float pointX, float pointY, float opointX, float opointY)
 {
@@ -134,77 +149,95 @@ void gameObject::rebound(CollideSide side)
 CollideSide gameObject::getCollideSide(gameObject objectTest) {
     // xmin = x et xmax = x + size
     // ymin = y et ymax = y + size
+    bool collid = false;
+    if (getShapeType() == ShapeType::Circle) {
+  
+        float x = getX();
+        float y = getY();
 
-    float x = getX();
-    float y = getY();
+        // On calcule un point au milieu de chaque longueur du carré 
+        float lpointX = this->x;
+        float lpointY = this->y + w / 2;
 
-    // On calcule un point au milieu de chaque longueur du carré 
-    float lpointX = this->x;
-    float lpointY = this->y + w / 2;
+        float rpointX = this->x + w;
+        float rpointY = this->y + w / 2;
 
-    float rpointX = this->x + w;
-    float rpointY = this->y + w / 2;
+        float tpointX = this->x + h / 2;
+        float tpointY = this->y;
 
-    float tpointX = this->x + h / 2;
-    float tpointY = this->y;
+        float bpointX = this->x + h / 2;
+        float bpointY = this->y + h;
 
-    float bpointX = this->x + h / 2;
-    float bpointY = this->y + h;
+        // Pareil pour les objets 
 
-    // Pareil pour les objets 
+        float olpointX = objectTest.x;
+        float olpointY = objectTest.y + objectTest.w / 2;
 
-    float olpointX = objectTest.x;
-    float olpointY = objectTest.y + objectTest.w / 2;
+        float orpointX = objectTest.x + objectTest.w;
+        float orpointY = objectTest.y + objectTest.w / 2;
 
-    float orpointX = objectTest.x + objectTest.w;
-    float orpointY = objectTest.y + objectTest.w / 2;
+        float otpointX = objectTest.x + objectTest.h / 2;
+        float otpointY = objectTest.y;
 
-    float otpointX = objectTest.x + objectTest.h / 2;
-    float otpointY = objectTest.y;
+        float obpointX = objectTest.x + objectTest.h / 2;
+        float obpointY = objectTest.y + objectTest.h;
 
-    float obpointX = objectTest.x + objectTest.h / 2;
-    float obpointY = objectTest.y + objectTest.h;
+        if (getShapeType() == ShapeType::Circle) {
+            // On calcule un point au milieu de chaque longueur du carré 
+            float lpointX = this->x;
+            float lpointY = this->y + r / 2;
 
-    if (
-        /*verif pour x*/(x <= (objectTest.x + objectTest.w) || x + w <= objectTest.x  )
-        &&
-        /*verif pour y*/ (y <= (objectTest.y + objectTest.h) || y + h <= objectTest.y )
-        )
-    {
+            float rpointX = this->x + r;
+            float rpointY = this->y + r / 2;
 
-        // Stock résultats dans la structure
-        distanceResult results[] = {
-            distanceResult("rtol", distance(rpointX , rpointY , olpointX , olpointY)),
-            distanceResult("ltor", distance(lpointX , lpointY , orpointX , orpointY)),
-            distanceResult("ttob", distance(tpointX ,tpointY , obpointX , obpointY)),
-            distanceResult("btot", distance(bpointX , bpointY , otpointX , otpointY))
-        };
+            float tpointX = this->x + r / 2;
+            float tpointY = this->y;
 
-        // petite distance
-        float minDistance = results[0].value;
-        std::string testDistance = results[0].name;
+            float bpointX = this->x + r / 2;
+            float bpointY = this->y + r;
+        }
 
-        for (int i = 1; i < 4; i++) {
-            if (results[i].value < minDistance) {
-                minDistance = results[i].value;
-                testDistance = results[i].name;
+        if (
+            /*verif pour x*/(x <= (objectTest.x + objectTest.w) || x + w <= objectTest.x)
+            &&
+            /*verif pour y*/ (y <= (objectTest.y + objectTest.h) || y + h <= objectTest.y)
+            )
+        {
+            // Stock résultats dans la structure
+            distanceResult results[] = {
+                distanceResult("rtol", distance(rpointX , rpointY , olpointX , olpointY)),
+                distanceResult("ltor", distance(lpointX , lpointY , orpointX , orpointY)),
+                distanceResult("ttob", distance(tpointX ,tpointY , obpointX , obpointY)),
+                distanceResult("btot", distance(bpointX , bpointY , otpointX , otpointY))
+            };
+
+            // petite distance
+            float minDistance = results[0].value;
+            std::string testDistance = results[0].name;
+
+            for (int i = 1; i < 4; i++) {
+                if (results[i].value < minDistance) {
+                    minDistance = results[i].value;
+                    testDistance = results[i].name;
+                }
+            }
+
+            if (testDistance == "rtol") {
+                return Right;
+            }
+            else if (testDistance == "ltor") {
+                return Left;
+            }
+            else if (testDistance == "ttob") {
+                return Top;
+            }
+            else if (testDistance == "btot") {
+                return Bottom;
             }
         }
-
-        if (testDistance == "rtol") {
-            return Right;
-        }
-        else if (testDistance == "ltor") {
-            return Left;
-        }
-        else if (testDistance == "ttob") {
-            return Top;
-        }
-        else if (testDistance == "btot") {
-            return Bottom;
-        }
+        
     }
-    return None;
+    return CollideSide::None;
 }
 
 // Rotation

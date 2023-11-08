@@ -20,7 +20,7 @@ int main()
 
     float elaspedTimeF = 0.f;
     Clock clock;
-    myBall.setOrientation(0.0, -75.0);
+    myBall.setOrientation(10.0, -75.0);
     while (window.isOpen())
     {
         Event event;
