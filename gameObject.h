@@ -34,12 +34,12 @@ private:
     float dy;
 
 public:
-    gameObject(int w, int h, int x, int y);
-    gameObject(int r, int x, int y);
+    gameObject(int w, int h, float x, float y);
+    gameObject(float r, float x, float y);
 
     int w;
     int h;
-    int r;
+    float r;
     float x;
     float y;
     float angle;
@@ -54,7 +54,7 @@ public:
 
     int getWidth();
     int getHeight();
-    int getRadius();
+    float getRadius();
 
     float speed;
     void setSpeed(float speed);

@@ -1,6 +1,6 @@
 #include "gameObject.h"
 
-gameObject::gameObject(int w, int h, int x, int y)
+gameObject::gameObject(int w, int h, float x, float y)
 {
     this->w = w;
     this->h = h;
@@ -26,7 +26,7 @@ gameObject::gameObject(int w, int h, int x, int y)
 }
 
 
-gameObject::gameObject(int r, int x, int y)
+gameObject::gameObject(float r, float x, float y)
 {
     this->x = x;
     this->y = y;
@@ -95,7 +95,7 @@ int gameObject::getHeight()
     return h;
 };
 
-int gameObject::getRadius()
+float gameObject::getRadius()
 {
     return r;
 };
