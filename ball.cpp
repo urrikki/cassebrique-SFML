@@ -8,7 +8,7 @@ Ball::Ball() : gameObject(4, 640, 600)
 
 void Ball::initBall()
 {
-    setSpeed(2);
+    setSpeed(100);
     setColor(Color::Cyan);
 };
 
