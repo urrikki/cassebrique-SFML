@@ -53,7 +53,7 @@ int main()
         {
             if (shot == false)
             {
-                myBall.setPosition(myCanon.x - myCanon.w , myCanon.y - myCanon.h);
+                myBall.setPosition(myCanon.x - myCanon.w / 2, myCanon.y - myCanon.h);
                 myBall.setOrientation(std::cos(myCanon.angle * M_PI / 180.0f) , std::sin(myCanon.angle * M_PI / 180.0f));
                 shot = true;
             }
