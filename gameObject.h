@@ -53,6 +53,10 @@ public:
     int getHeight();
     int getRadius();
 
+    float speed;
+    void setSpeed(float speed);
+
+
     void setColor(Color color);
     Color getColor();
 
