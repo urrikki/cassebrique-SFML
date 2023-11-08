@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <iostream>
 #include <vector>
 
 using namespace sf;
@@ -12,6 +13,14 @@ typedef enum CollideSide
     Left,
     Top,
     Bottom,
+};
+
+typedef enum ShapeType
+{
+    NoShape,
+    Rectangle,
+    Square,
+    Circle,
 };
 
 class gameObject
@@ -30,7 +39,7 @@ public:
     int radius;
 
     Shape* shape;
-
+    ShapeType shapeType;
     Color m_color;
 
     void setPosition(float x, float y);
@@ -47,6 +56,9 @@ public:
     void drawShape(RenderWindow& window);
 
     CollideSide getCollideSide(gameObject object);
+
+    ShapeType getShapeType();
+
 
     float orientationX;
     float orientationY;
