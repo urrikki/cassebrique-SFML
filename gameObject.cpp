@@ -2,9 +2,12 @@
 
 gameObject::gameObject(int w, int h)
 {
+    this->w = w;
+    this->h = h;
     x = 0;
     y = 0;
-    size = 100;
+    orientationX = 0;
+    orientationY = 0;
     Color m_color = Color::White;
 
     shape = new RectangleShape(sf::Vector2f(w, h));
@@ -17,6 +20,9 @@ gameObject::gameObject(int r)
 {
     x = 0;
     y = 0;
+    this->r = r;
+    orientationX = 0;
+    orientationY = 0;
     Color m_color = Color::White;
 
     shape = new CircleShape(r);
@@ -100,45 +106,69 @@ struct distanceResult {
     distanceResult(const std::string& n, float v) : name(n), value(v) {}
 };
 
+void gameObject::setOrientation(float x, float y)
+{
+    this->orientationX = x;
+    this->orientationY = y;
+
+}
+
+void gameObject::moveBall(float elapsedTimeF)
+{
+    setPosition(x + (elapsedTimeF * orientationX), y + (elapsedTimeF * orientationY));
+}
+
+void gameObject::rebound(CollideSide side)
+{
+    if (side == CollideSide::Bottom || side == CollideSide::Top)
+    {
+        this->orientationY = orientationY * -1;
+    }
+    else if (side == CollideSide::Right || side == CollideSide::Left)
+    {
+        this->orientationX = orientationX * -1;
+    }
+
+}
 
 CollideSide gameObject::getCollideSide(gameObject objectTest) {
     // xmin = x et xmax = x + size
     // ymin = y et ymax = y + size
 
-    int x = getX();
-    int y = getY();
+    float x = getX();
+    float y = getY();
 
     // On calcule un point au milieu de chaque longueur du carré 
     float lpointX = this->x;
-    float lpointY = this->y + size / 2;
+    float lpointY = this->y + w / 2;
 
-    float rpointX = this->x + size;
-    float rpointY = this->y + size / 2;
+    float rpointX = this->x + w;
+    float rpointY = this->y + w / 2;
 
-    float tpointX = this->x + size / 2;
+    float tpointX = this->x + h / 2;
     float tpointY = this->y;
 
-    float bpointX = this->x + size / 2;
-    float bpointY = this->y + size;
+    float bpointX = this->x + h / 2;
+    float bpointY = this->y + h;
 
     // Pareil pour les objets 
 
     float olpointX = objectTest.x;
-    float olpointY = objectTest.y + objectTest.size / 2;
+    float olpointY = objectTest.y + objectTest.w / 2;
 
-    float orpointX = objectTest.x + objectTest.size;
-    float orpointY = objectTest.y + objectTest.size / 2;
+    float orpointX = objectTest.x + objectTest.w;
+    float orpointY = objectTest.y + objectTest.w / 2;
 
-    float otpointX = objectTest.x + objectTest.size / 2;
+    float otpointX = objectTest.x + objectTest.h / 2;
     float otpointY = objectTest.y;
 
-    float obpointX = objectTest.x + objectTest.size / 2;
-    float obpointY = objectTest.y + objectTest.size;
+    float obpointX = objectTest.x + objectTest.h / 2;
+    float obpointY = objectTest.y + objectTest.h;
 
     if (
-        /*verif pour x*/(x <= (objectTest.x + objectTest.size) || x + size <= objectTest.x  )
+        /*verif pour x*/(x <= (objectTest.x + objectTest.w) || x + w <= objectTest.x  )
         &&
-        /*verif pour y*/ (y <= (objectTest.y + objectTest.size) || y + size <= objectTest.y )
+        /*verif pour y*/ (y <= (objectTest.y + objectTest.h) || y + h <= objectTest.y )
         )
     {
 

@@ -3,7 +3,7 @@
 
 using namespace sf;
 
-Brick::Brick() : gameObject(0,0)
+Brick::Brick() : gameObject(50,50)
 {
     life = 100;
 };

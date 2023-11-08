@@ -24,8 +24,8 @@ public:
     int w;
     int h;
     int r;
-    int x;
-    int y;
+    float x;
+    float y;
     int size;
     int radius;
 
@@ -47,5 +47,12 @@ public:
     void drawShape(RenderWindow& window);
 
     CollideSide getCollideSide(gameObject object);
+
+    float orientationX;
+    float orientationY;
+
+    void setOrientation(float x, float y);
+    void moveBall(float elapsedTimeF);
+    void rebound(CollideSide side);
 
 };

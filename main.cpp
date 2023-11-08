@@ -30,10 +30,10 @@ int main()
         window.clear();
         myBrick.drawShape(window);
         myBall.drawShape(window);
-
+        
         myBall.moveBall(elaspedTimeF);
         myBall.rebound(myBall.getCollideSide(myBrick));
-
+   
         window.display();
 
 
