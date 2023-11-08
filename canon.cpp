@@ -3,7 +3,7 @@
 
 using namespace sf;
 
-Canon::Canon()
+Canon::Canon() : gameObject(0,0)
 {
 
 };

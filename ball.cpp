@@ -3,25 +3,25 @@
 
 using namespace sf;
 
-Ball::Ball(){};
+Ball::Ball() : gameObject(0)
+{};
 
 void Ball::initBall()
 {
     setPosition(640, 600);
     setColor(Color::Cyan);
-    setSize(25);
     float orientationX = 0.0;
     float orientationY = 0.0;
 };
 
-void Ball::setOrientation(float x , float y)
+void Ball::setOrientation(float x, float y)
 {
     this->orientationX = x;
     this->orientationY = y;
 
 }
 
-void Ball::moveBallT(float elapsedTimeF)
+void Ball::moveBall(float elapsedTimeF)
 {
     setPosition(x + (elapsedTimeF * orientationX), y + (elapsedTimeF * orientationY));
 }
@@ -36,7 +36,5 @@ void Ball::rebound(CollideSide side)
     {
         this->orientationX = orientationX * -1;
     }
-    
+
 }
-
-

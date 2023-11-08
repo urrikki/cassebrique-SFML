@@ -13,7 +13,7 @@ public:
 
     void initBall();
 
-    void moveBallT(float elapsedTimeF);
+    void moveBall(float elapsedTimeF);
 
     void rebound(CollideSide side);
 };
