@@ -2,8 +2,6 @@
 
 gameObject::gameObject(int w, int h)
 {
-    w = 50;
-    h = 50;
     x = 0;
     y = 0;
     size = 100;
@@ -17,7 +15,6 @@ gameObject::gameObject(int w, int h)
 
 gameObject::gameObject(int r)
 {
-    r = 50;
     x = 0;
     y = 0;
     Color m_color = Color::White;

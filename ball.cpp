@@ -9,27 +9,32 @@ Ball::Ball() : gameObject(0)
 void Ball::initBall()
 {
     setPosition(640, 600);
-    setColor(Color::Blue);
+    setColor(Color::Cyan);
+    float orientationX = 0.0;
+    float orientationY = 0.0;
 };
 
-void Ball::moveBall(float elapsedTimeF , CollideSide side)
+void Ball::setOrientation(float x, float y)
 {
-    float movement = 50.f * elapsedTimeF;
-    if (side == CollideSide::None || side == CollideSide::Bottom)
+    this->orientationX = x;
+    this->orientationY = y;
+
+}
+
+void Ball::moveBall(float elapsedTimeF)
+{
+    setPosition(x + (elapsedTimeF * orientationX), y + (elapsedTimeF * orientationY));
+}
+
+void Ball::rebound(CollideSide side)
+{
+    if (side == CollideSide::Bottom || side == CollideSide::Top)
     {
-        setPosition(x, y - movement);
+        this->orientationY = orientationY * -1;
     }
-    else if (side == CollideSide::Top )
+    else if (side == CollideSide::Right || side == CollideSide::Left)
     {
-        setPosition(x, y + movement);
+        this->orientationX = orientationX * -1;
     }
-    else if (side == CollideSide::Right )
-    {
-        setPosition(x + movement, y);
-    }
-    else if (side == CollideSide::Left )
-    {
-        setPosition(x - movement , y);
-    }
-    
+
 }

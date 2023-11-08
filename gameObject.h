@@ -31,8 +31,6 @@ public:
 
     Shape* shape;
 
-    bool isRectangle;
-
     Color m_color;
 
     void setPosition(float x, float y);
