@@ -1,5 +1,8 @@
 #pragma once
+#define _USE_MATH_DEFINES
+
 #include <SFML/Graphics.hpp>
+#include <cmath>
 #include <string>
 #include <iostream>
 #include <vector>
@@ -31,8 +34,8 @@ private:
     float dy;
 
 public:
-    gameObject(int w, int h);
-    gameObject(int r);
+    gameObject(int w, int h, int x, int y);
+    gameObject(int r, int x, int y);
 
     int w;
     int h;

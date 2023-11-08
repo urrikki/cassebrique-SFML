@@ -3,12 +3,11 @@
 
 using namespace sf;
 
-Ball::Ball() : gameObject(4)
+Ball::Ball() : gameObject(4, 640, 600)
 {};
 
 void Ball::initBall()
 {
-    setPosition(640, 600);
     setColor(Color::Cyan);
 };
 

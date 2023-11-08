@@ -3,13 +3,12 @@
 
 using namespace sf;
 
-Brick::Brick() : gameObject(80,30)
+Brick::Brick() : gameObject(80,30,640,360)
 {
     life = 100;
 };
 
 void Brick::initBrick()
 {
-    setPosition(640, 360);
     setColor(Color::Cyan);
 };

@@ -1,11 +1,11 @@
 #include "gameObject.h"
 
-gameObject::gameObject(int w, int h)
+gameObject::gameObject(int w, int h, int x, int y)
 {
     this->w = w;
     this->h = h;
-    x = 0;
-    y = 0;
+    this->x = x;
+    this->y = y;
     shapeType = NoShape;
     orientationX = 0;
     orientationY = 0;
@@ -25,10 +25,10 @@ gameObject::gameObject(int w, int h)
 }
 
 
-gameObject::gameObject(int r)
+gameObject::gameObject(int r, int x, int y)
 {
-    x = 0;
-    y = 0;
+    this->x = x;
+    this->y = y;
     this->r = r;
     orientationX = 0;
     orientationY = 0;
@@ -248,7 +248,7 @@ void gameObject::rotateTowardsMouse(sf::RenderWindow& window)
     dx = mousePosition.x - x;
     dy = mousePosition.y - y;
 
-    angle = std::atan2(dy, dx) * 180 / PI;
+    angle = std::atan2(dy, dx) * 180 / M_PI;
     shape->setOrigin(0, h / 2);
     shape->setRotation(angle);
 };
