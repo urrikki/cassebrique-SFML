@@ -5,4 +5,6 @@ class Canon : public gameObject
 {
 public:
     Canon();
+    
+    void initCanon();
 };

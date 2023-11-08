@@ -16,6 +16,10 @@ typedef enum CollideSide
 
 class gameObject
 {
+private: 
+    const float PI = 3.14159265358979323846f;
+    float dx;
+    float dy;
 
 public:
     gameObject(int w, int h);
@@ -26,8 +30,7 @@ public:
     int r;
     float x;
     float y;
-    int size;
-    int radius;
+    float angle;
 
     Shape* shape;
 
@@ -54,5 +57,8 @@ public:
     void setOrientation(float x, float y);
     void moveBall(float elapsedTimeF);
     void rebound(CollideSide side);
+
+    void rotateTowardsMouse(sf::RenderWindow& window);
+    void setRotation(float angle);
 
 };

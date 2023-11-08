@@ -207,3 +207,21 @@ CollideSide gameObject::getCollideSide(gameObject objectTest) {
     return None;
 }
 
+// Rotation
+void gameObject::rotateTowardsMouse(sf::RenderWindow& window)
+{
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+
+    dx = mousePosition.x - x;
+    dy = mousePosition.y - y;
+
+    angle = std::atan2(dy, dx) * 180 / PI;
+    shape->setOrigin(0, h / 2);
+    shape->setRotation(angle);
+};
+
+void gameObject::setRotation(float angle)
+{
+    this->angle = angle;
+    shape->setRotation(angle);
+};

@@ -2,17 +2,20 @@
 #include <iostream>
 #include "brick.h"
 #include "ball.h"
+#include "canon.h"
 
 using namespace sf;
 
 Brick myBrick;
 Ball myBall;
+Canon myCanon;
 
 int main()
 {
     RenderWindow window(VideoMode(1280, 720), "SFML works!");
     myBrick.initBrick();
     myBall.initBall();
+    myCanon.initCanon();
     Time frameTime = seconds(1.0f / 60.0f);
 
     float elaspedTimeF = 0.f;
@@ -30,9 +33,13 @@ int main()
         window.clear();
         myBrick.drawShape(window);
         myBall.drawShape(window);
+        myCanon.drawShape(window);
         
+        myCanon.rotateTowardsMouse(window);
+
         myBall.moveBall(elaspedTimeF);
         myBall.rebound(myBall.getCollideSide(myBrick));
+
    
         window.display();
 
