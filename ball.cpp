@@ -3,13 +3,13 @@
 
 using namespace sf;
 
-Ball::Ball(){};
+Ball::Ball() : gameObject(20)
+{};
 
 void Ball::initBall()
 {
     setPosition(640, 600);
-    setColor(Color::Cyan);
-    setSize(25);
+    setColor(Color::Blue);
     float orientationX = 0.0;
     float orientationY = 0.0;
 };
