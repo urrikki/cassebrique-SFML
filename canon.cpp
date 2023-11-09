@@ -3,13 +3,7 @@
 
 using namespace sf;
 
-Canon::Canon() : gameObject(60,40,640,650)
+Canon::Canon() : gameObject(60,40,640,650,Color::Magenta)
 {
-    setPosition(640, 700);
-    setColor(Color::Magenta);
-};
 
-void Canon:: initCanon()
-{
-    setColor(Color::Magenta);
 };

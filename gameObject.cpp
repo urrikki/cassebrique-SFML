@@ -1,16 +1,27 @@
+#define _USE_MATH_DEFINES
+
 #include "gameObject.h"
 
-gameObject::gameObject(int w, int h, float x, float y)
+#include <SFML/Graphics.hpp>
+#include <cmath>
+#include <string>
+#include <iostream>
+#include <vector>
+
+
+using namespace sf;
+
+gameObject::gameObject(int w, int h, float x, float y, sf::Color color)
 {
     this->w = w;
     this->h = h;
     this->x = x;
     this->y = y;
+    m_color = color;
     speed = 0;
     shapeType = NoShape;
     orientationX = 0;
     orientationY = 0;
-    Color m_color = Color::White;
 
     shape = new RectangleShape(sf::Vector2f(w, h));
     if (w == h)
@@ -26,30 +37,22 @@ gameObject::gameObject(int w, int h, float x, float y)
 }
 
 
-gameObject::gameObject(float r, float x, float y)
+gameObject::gameObject(float r, float x, float y, sf::Color color)
 {
     this->x = x;
     this->y = y;
     this->r = r;
+    m_color = color;
     speed = 0;
     orientationX = 0;
     orientationY = 0;
     shapeType = Circle;
-    Color m_color = Color::White;
 
     shape = new CircleShape(r);
     shape->setPosition(x, y);
     shape->setFillColor(m_color);
 }
 
-
-//void Init() 
-//{
-//    w = 0;
-//    h = 0;
-//    x = 0;
-//    y = 0;
-//}
 
 void gameObject::setSpeed(float speed)
 {
