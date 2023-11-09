@@ -33,8 +33,8 @@ private:
     float dy;
 
 public:
-    gameObject(int w, int h, float x, float y);
-    gameObject(float r, float x, float y);
+    gameObject(int w, int h, float x, float y, sf::Color color);
+    gameObject(float r, float x, float y, sf::Color color);
 
     int w;
     int h;

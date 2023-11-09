@@ -11,17 +11,17 @@
 
 using namespace sf;
 
-gameObject::gameObject(int w, int h, float x, float y)
+gameObject::gameObject(int w, int h, float x, float y, sf::Color color)
 {
     this->w = w;
     this->h = h;
     this->x = x;
     this->y = y;
+    m_color = color;
     speed = 0;
     shapeType = NoShape;
     orientationX = 0;
     orientationY = 0;
-    Color m_color = Color::White;
 
     shape = new RectangleShape(sf::Vector2f(w, h));
     if (w == h)
@@ -37,16 +37,16 @@ gameObject::gameObject(int w, int h, float x, float y)
 }
 
 
-gameObject::gameObject(float r, float x, float y)
+gameObject::gameObject(float r, float x, float y, sf::Color color)
 {
     this->x = x;
     this->y = y;
     this->r = r;
+    m_color = color;
     speed = 0;
     orientationX = 0;
     orientationY = 0;
     shapeType = Circle;
-    Color m_color = Color::White;
 
     shape = new CircleShape(r);
     shape->setPosition(x, y);

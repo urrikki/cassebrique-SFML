@@ -7,6 +7,4 @@ public:
     Brick();
 
     int life;
-
-    void initBrick();
 };

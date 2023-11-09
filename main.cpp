@@ -1,11 +1,12 @@
 #define _USE_MATH_DEFINES
 
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <cmath>
 #include "brick.h"
 #include "ball.h"
 #include "canon.h"
+
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include <cmath>
 
 
 using namespace sf;
@@ -17,9 +18,7 @@ Canon myCanon;
 int main()
 {
     RenderWindow window(VideoMode(1280, 720), "SFML works!");
-    myBrick.initBrick();
     myBall.initBall();
-    myCanon.initCanon();
     Time frameTime = seconds(1.0f / 60.0f);
 
     float elaspedTimeF = 0.f;
