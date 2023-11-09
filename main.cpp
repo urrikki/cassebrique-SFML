@@ -58,6 +58,8 @@ int main()
             myBall.drawShape(window);
             myBall.moveBall(elaspedTimeF);
             myBall.OnCollisionEnter(myBrick);
+            myBall.OnCollisionStory();
+            myBall.OnCollisionStory();
         }
         myCanon.drawShape(window);
         window.display();
