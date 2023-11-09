@@ -25,6 +25,7 @@ int main()
     Clock clock;
     bool click = false;
     bool shot = false;
+
     while (window.isOpen())
     {
         Event event;
