@@ -125,7 +125,16 @@ void gameObject::setOrientation(float x, float y)
 {
     this->orientationX = x;
     this->orientationY = y;
+}
 
+float gameObject::getOrientationX()
+{
+    return orientationX;
+}
+
+float gameObject::getOrientationY()
+{
+    return orientationY;
 }
 
 void gameObject::moveBall(float elapsedTimeF)

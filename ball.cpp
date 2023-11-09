@@ -3,7 +3,7 @@
 
 using namespace sf;
 
-Ball::Ball() : gameObject(4, 640, 600,Color::Blue)
+Ball::Ball() : gameObject(4, 640, 600,Color::Yellow)
 {};
 
 void Ball::initBall()

@@ -73,6 +73,9 @@ public:
     float orientationY;
 
     void setOrientation(float x, float y);
+    float getOrientationX();
+    float getOrientationY();
+
     void moveBall(float elapsedTimeF);
     void rebound(CollideSide side);
 
