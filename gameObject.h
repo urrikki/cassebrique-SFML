@@ -64,7 +64,7 @@ public:
 
     void drawShape(sf::RenderWindow& window);
 
-    CollideSide getCollideSide(gameObject object);
+    CollideSide getCollideSide(gameObject* objectTest);
 
     ShapeType getShapeType();
 
@@ -81,5 +81,9 @@ public:
 
     void rotateTowardsMouse(sf::RenderWindow& window);
     void setRotation(float angle);
+
+    virtual void OnCollisionEnter(gameObject* object);
+    virtual void OnCollisionStay();
+    virtual void OnCollisionExit();
 
 };
