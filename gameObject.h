@@ -1,13 +1,6 @@
 #pragma once
-#define _USE_MATH_DEFINES
 
-#include <SFML/Graphics.hpp>
-#include <cmath>
-#include <string>
-#include <iostream>
-#include <vector>
-
-using namespace sf;
+#include <SFML/Graphics/Color.hpp>
 
 typedef enum CollideSide
 {
@@ -26,10 +19,16 @@ typedef enum ShapeType
     Circle,
 };
 
+namespace sf 
+{
+    class Shape;
+    class RenderWindow;
+}
+
+
 class gameObject
 {
 private: 
-    const float PI = 3.14159265358979323846f;
     float dx;
     float dy;
 
@@ -44,9 +43,9 @@ public:
     float y;
     float angle;
 
-    Shape* shape;
+    sf::Shape* shape;
     ShapeType shapeType;
-    Color m_color;
+    sf::Color m_color;
 
     void setPosition(float x, float y);
     float getX();
@@ -60,10 +59,10 @@ public:
     void setSpeed(float speed);
 
 
-    void setColor(Color color);
-    Color getColor();
+    void setColor(sf::Color color);
+    sf::Color getColor();
 
-    void drawShape(RenderWindow& window);
+    void drawShape(sf::RenderWindow& window);
 
     CollideSide getCollideSide(gameObject object);
 

@@ -1,4 +1,15 @@
+#define _USE_MATH_DEFINES
+
 #include "gameObject.h"
+
+#include <SFML/Graphics.hpp>
+#include <cmath>
+#include <string>
+#include <iostream>
+#include <vector>
+
+
+using namespace sf;
 
 gameObject::gameObject(int w, int h, float x, float y)
 {
@@ -42,14 +53,6 @@ gameObject::gameObject(float r, float x, float y)
     shape->setFillColor(m_color);
 }
 
-
-//void Init() 
-//{
-//    w = 0;
-//    h = 0;
-//    x = 0;
-//    y = 0;
-//}
 
 void gameObject::setSpeed(float speed)
 {
