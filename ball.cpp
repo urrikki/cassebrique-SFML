@@ -11,3 +11,17 @@ void Ball::initBall()
     setSpeed(100);
 };
 
+void Ball::OnCollisionEnter(gameObject object)
+{
+    rebound(getCollideSide(object));
+}
+
+void Ball::OnCollisionStory()
+{
+
+}
+
+void Ball::OnCollisionExit()
+{
+
+}

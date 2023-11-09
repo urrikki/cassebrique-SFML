@@ -57,7 +57,7 @@ int main()
             }
             myBall.drawShape(window);
             myBall.moveBall(elaspedTimeF);
-            myBall.rebound(myBall.getCollideSide(myBrick));
+            myBall.OnCollisionEnter(myBrick);
         }
         myCanon.drawShape(window);
         window.display();
