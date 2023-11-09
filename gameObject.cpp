@@ -165,9 +165,9 @@ CollideSide gameObject::getCollideSide(gameObject objectTest) {
     }
 
     if (
-        /*verif pour x*/(x > objectTest.x && x < (objectTest.x + objectTest.w) || x + w > objectTest.x && x + w > (objectTest.x + objectTest.w))
+        /*verif pour x*/(x > objectTest.x && x < (objectTest.x + objectTest.w) || x + w > objectTest.x && x + w < (objectTest.x + objectTest.w))
         &&
-        /*verif pour y*/ (y > objectTest.y  && y < (objectTest.y + objectTest.h) || y + h > objectTest.y && y + h < (objectTest.y + objectTest.h))
+        /*verif pour y*/ (y > objectTest.y && y < (objectTest.y + objectTest.h) || y + h > objectTest.y && y + h < (objectTest.y + objectTest.h))
         )
     {
         
