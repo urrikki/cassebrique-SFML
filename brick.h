@@ -8,7 +8,7 @@ public:
 
     Brick();
 
-    virtual void OnCollisionEnter(gameObject object);
-    virtual void OnCollisionStory();
+    virtual void OnCollisionEnter(gameObject* object);
+    virtual void OnCollisionStay();
     virtual void OnCollisionExit();
 };

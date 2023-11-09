@@ -59,6 +59,7 @@ int main()
             myBall.OnCollisionEnter(&myBrick);   
         }
         myCanon.drawShape(window);
+        myBrick.OnCollisionEnter(&myBall);
         window.display();
 
 
