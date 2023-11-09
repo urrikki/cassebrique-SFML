@@ -155,7 +155,7 @@ void gameObject::rebound(CollideSide side)
 
 }
 
-CollideSide gameObject::getCollideSide(gameObject objectTest) {
+CollideSide gameObject::getCollideSide(gameObject* objectTest) {
     // xmin = x et xmax = x + size
     // ymin = y et ymax = y + size
     if (getShapeType() == ShapeType::Circle)
@@ -165,18 +165,18 @@ CollideSide gameObject::getCollideSide(gameObject objectTest) {
     }
 
     if (
-        /*verif pour x*/(x > objectTest.x && x < (objectTest.x + objectTest.w) || x + w > objectTest.x && x + w < (objectTest.x + objectTest.w))
+        /*verif pour x*/(x > objectTest->x && x < (objectTest->x + objectTest->w) || x + w > objectTest->x && x + w < (objectTest->x + objectTest->w))
         &&
-        /*verif pour y*/ (y > objectTest.y && y < (objectTest.y + objectTest.h) || y + h > objectTest.y && y + h < (objectTest.y + objectTest.h))
+        /*verif pour y*/ (y > objectTest->y && y < (objectTest->y + objectTest->h) || y + h > objectTest->y && y + h < (objectTest->y + objectTest->h))
         )
     {
-        
+
         // Stock résultats dans la structure       
         distanceResult results[] = {
-            distanceResult("rtol", std::abs(x + w - objectTest.x)),
-            distanceResult("ltor", std::abs(x - objectTest.x - objectTest.w)),
-            distanceResult("ttob", std::abs(y - objectTest.y - objectTest.h)),
-            distanceResult("btot", std::abs(y + h - objectTest.y))
+            distanceResult("rtol", std::abs(x + w - objectTest->x)),
+            distanceResult("ltor", std::abs(x - objectTest->x - objectTest->w)),
+            distanceResult("ttob", std::abs(y - objectTest->y - objectTest->h)),
+            distanceResult("btot", std::abs(y + h - objectTest->y))
         };
 
         // petite distance
@@ -207,7 +207,7 @@ CollideSide gameObject::getCollideSide(gameObject objectTest) {
             return Bottom;
         }
     }
-        
+
     return CollideSide::None;
 }
 
@@ -229,3 +229,18 @@ void gameObject::setRotation(float angle)
     this->angle = angle;
     shape->setRotation(angle);
 };
+
+void gameObject::OnCollisionEnter(gameObject* object)
+{
+    
+}
+
+void gameObject::OnCollisionStay()
+{
+
+}
+
+void gameObject::OnCollisionExit()
+{
+
+}

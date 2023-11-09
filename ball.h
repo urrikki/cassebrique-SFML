@@ -7,8 +7,7 @@ public:
     Ball();
 
     void initBall();
-    virtual void OnCollisionEnter(gameObject object);
-    virtual void OnCollisionStory();
-    virtual void OnCollisionExit();
+    
+    void OnCollisionEnter(gameObject* object) override;
  
 };

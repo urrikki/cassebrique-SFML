@@ -23,7 +23,6 @@ int main()
 
     float elaspedTimeF = 0.f;
     Clock clock;
-    myBall.setOrientation(10.0, -75.0);
     bool click = false;
     bool shot = false;
     while (window.isOpen())
@@ -57,9 +56,7 @@ int main()
             }
             myBall.drawShape(window);
             myBall.moveBall(elaspedTimeF);
-            myBall.OnCollisionEnter(myBrick);
-            myBall.OnCollisionStory();
-            myBall.OnCollisionStory();
+            myBall.OnCollisionEnter(&myBrick);   
         }
         myCanon.drawShape(window);
         window.display();
