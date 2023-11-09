@@ -38,7 +38,6 @@ int main()
             {
                 if (event.mouseButton.button ==Mouse::Left)
                 {
-                    std::cout << "miaouuu";
                     click = true;
                 }
             }
@@ -53,7 +52,7 @@ int main()
         {
             if (shot == false)
             {
-                myBall.setPosition(myCanon.x - myCanon.w / 2, myCanon.y - myCanon.h);
+                myBall.setPosition(myCanon.x , myCanon.y - myCanon.h / 2);
                 myBall.setOrientation(std::cos(myCanon.angle * M_PI / 180.0f) , std::sin(myCanon.angle * M_PI / 180.0f));
                 shot = true;
             }
