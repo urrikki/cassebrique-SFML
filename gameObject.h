@@ -77,7 +77,6 @@ public:
     float getOrientationY();
 
     void move(float elapsedTimeF);
-    
 
     void rotateTowardOrigin(float x, float y);
     void setRotation(float angle);
@@ -86,4 +85,5 @@ public:
     virtual void OnCollisionStay();
     virtual void OnCollisionExit();
 
+    bool isShapeOnScreen(sf::RenderWindow& window);
 };

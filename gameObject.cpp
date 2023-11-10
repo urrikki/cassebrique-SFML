@@ -241,3 +241,28 @@ void gameObject::OnCollisionExit()
 {
 
 }
+
+bool gameObject::isShapeOnScreen(sf::RenderWindow& window)
+{
+    // Obtenez les dimensions de la fenêtre
+    float windowWidth = static_cast<float>(window.getSize().x);
+    float windowHeight = static_cast<float>(window.getSize().y);
+
+    // Obtenez les coordonnées de la shape
+    float shapeLeft = shape->getPosition().x;
+    float shapeTop = shape->getPosition().y;
+    float shapeRight = shapeLeft + shape->getGlobalBounds().width;
+    float shapeBottom = shapeTop + shape->getGlobalBounds().height;
+
+    // Vérifiez si la shape est entièrement à l'intérieur de l'écran
+    if (shapeLeft >= 0 && shapeTop >= 0 && shapeRight <= windowWidth && shapeBottom <= windowHeight)
+    {
+        std::cout << "miaou";
+        return true;
+    }
+    else
+    {
+        std::cout << "waf";
+        return false;
+    }
+}
