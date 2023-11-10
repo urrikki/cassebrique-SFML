@@ -77,7 +77,6 @@ public:
     float getOrientationY();
 
     void move(float elapsedTimeF);
-    
 
     void rotateTowardOrigin(float x, float y);
     int getAngleMouse(sf::RenderWindow& window);
@@ -87,4 +86,5 @@ public:
     virtual void OnCollisionStay();
     virtual void OnCollisionExit();
 
+    bool isShapeOnScreen(sf::RenderWindow& window);
 };

@@ -45,8 +45,6 @@ int main()
         }
         
         //UPDATE
-
-
         myCanon.rotateTowardOrigin(0,0.5);
         if (click == true)
         {
