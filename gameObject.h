@@ -79,7 +79,7 @@ public:
     void moveBall(float elapsedTimeF);
     void rebound(CollideSide side);
 
-    void rotateTowardsMouse(sf::RenderWindow& window);
+    void rotateTowardOrigin(float x, float y);
     void setRotation(float angle);
 
     virtual void OnCollisionEnter(gameObject* object);
