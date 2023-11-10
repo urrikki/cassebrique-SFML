@@ -56,7 +56,7 @@ int main()
                 shot = true;
             }
             myBall.drawShape(window);
-            myBall.moveBall(elaspedTimeF);
+            myBall.move(elaspedTimeF);
             myBrick.OnCollisionEnter(&myBall);
             myBall.OnCollisionEnter(&myBrick);
               

@@ -17,3 +17,16 @@ void Ball::OnCollisionEnter(gameObject* object)
     rebound(getCollideSide(object));
 }
 
+void Ball::rebound(CollideSide side)
+{
+    if (side == CollideSide::Bottom || side == CollideSide::Top)
+    {
+        this->orientationY = orientationY * -1;
+    }
+    else if (side == CollideSide::Right || side == CollideSide::Left)
+    {
+        this->orientationX = orientationX * -1;
+    }
+
+}
+

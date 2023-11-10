@@ -76,8 +76,8 @@ public:
     float getOrientationX();
     float getOrientationY();
 
-    void moveBall(float elapsedTimeF);
-    void rebound(CollideSide side);
+    void move(float elapsedTimeF);
+    
 
     void rotateTowardOrigin(float x, float y);
     void setRotation(float angle);

@@ -137,23 +137,13 @@ float gameObject::getOrientationY()
     return orientationY;
 }
 
-void gameObject::moveBall(float elapsedTimeF)
+void gameObject::move(float elapsedTimeF)
 {
-    setPosition(x + (speed * (elapsedTimeF * orientationX)), y + (speed * (elapsedTimeF * orientationY)));
+    float newX = x + (speed * (elapsedTimeF * orientationX));
+    float newY = y + (speed * (elapsedTimeF * orientationY));
+    setPosition(newX , newY );
 }
 
-void gameObject::rebound(CollideSide side)
-{
-    if (side == CollideSide::Bottom || side == CollideSide::Top)
-    {
-        this->orientationY = orientationY * -1;
-    }
-    else if (side == CollideSide::Right || side == CollideSide::Left)
-    {
-        this->orientationX = orientationX * -1;
-    }
-
-}
 
 CollideSide gameObject::getCollideSide(gameObject* objectTest) {
     // xmin = x et xmax = x + size
