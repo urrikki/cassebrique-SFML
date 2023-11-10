@@ -57,14 +57,22 @@ int main()
             myBall.move(elaspedTimeF);
             myBrick.OnCollisionEnter(&myBall);
             myBall.OnCollisionEnter(&myBrick);
+            if (myBall.isShapeOnScreen(window) == false)
+            {
+                myBall.setPosition(myCanon.x, myCanon.y - myCanon.h / 2);
+                shot = false;
+                click = false;
+            }
+            
         }
         
         //DRAW
         window.clear();
 
         myBrick.drawShape(window);
-        myCanon.drawShape(window);
         myBall.drawShape(window);
+        myCanon.drawShape(window);
+        
 
         window.display();
 
