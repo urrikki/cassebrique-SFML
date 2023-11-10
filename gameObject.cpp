@@ -256,13 +256,11 @@ bool gameObject::isShapeOnScreen(sf::RenderWindow& window)
 
     // Vérifiez si la shape est entièrement à l'intérieur de l'écran
     if (shapeLeft >= 0 && shapeTop >= 0 && shapeRight <= windowWidth && shapeBottom <= windowHeight)
-    {
-        std::cout << "miaou";
+    {      
         return true;
     }
     else
     {
-        std::cout << "waf";
         return false;
     }
 }
