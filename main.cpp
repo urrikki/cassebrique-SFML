@@ -35,7 +35,7 @@ int main()
                 window.close();
             else if (event.type == Event::MouseButtonPressed)
             {
-                if (event.mouseButton.button ==Mouse::Left)
+                if (event.mouseButton.button == Mouse::Left)
                 {
                     click = true;
                 }
@@ -57,10 +57,12 @@ int main()
             }
             myBall.drawShape(window);
             myBall.moveBall(elaspedTimeF);
-            myBall.OnCollisionEnter(&myBrick);   
+            myBrick.OnCollisionEnter(&myBall);
+            myBall.OnCollisionEnter(&myBrick);
+              
         }
         myCanon.drawShape(window);
-        myBrick.OnCollisionEnter(&myBall);
+        
         window.display();
 
 

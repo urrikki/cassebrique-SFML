@@ -1,5 +1,6 @@
 #include "brick.h"
 #include <vector>
+#include<iostream>
 
 using namespace sf;
 
@@ -10,7 +11,10 @@ Brick::Brick() : gameObject(80,30,640,360,Color::Cyan)
 
 void Brick::OnCollisionEnter(gameObject* object)
 {
-    setColor(Color::Green);
+    if (getCollideSide(object) != CollideSide::None)
+    {
+        setColor(Color::Green);
+    }   
 }
 
 void Brick::OnCollisionStay()

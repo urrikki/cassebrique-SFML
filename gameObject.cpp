@@ -164,13 +164,24 @@ CollideSide gameObject::getCollideSide(gameObject* objectTest) {
         h = r;
     }
 
+    if (objectTest->getShapeType() == ShapeType::Circle)
+    {
+        objectTest->w = objectTest->r;
+        objectTest->h = objectTest->r;
+    }
+
+    
     if (
         /*verif pour x*/(x > objectTest->x && x < (objectTest->x + objectTest->w) || x + w > objectTest->x && x + w < (objectTest->x + objectTest->w))
         &&
         /*verif pour y*/ (y > objectTest->y && y < (objectTest->y + objectTest->h) || y + h > objectTest->y && y + h < (objectTest->y + objectTest->h))
+        ||
+        /*verif pour x*/(objectTest->x > x && objectTest->x < (x + w) || objectTest->x + objectTest->w > x && objectTest->x + objectTest->w < (x + w))
+        &&
+        /*verif pour y*/ (objectTest->y > y && objectTest->y < (y + h) || objectTest->y + objectTest->h > y && objectTest->y + objectTest->h < (y + h))
         )
     {
-
+        
         // Stock résultats dans la structure       
         distanceResult results[] = {
             distanceResult("rtol", std::abs(x + w - objectTest->x)),
