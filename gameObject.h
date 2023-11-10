@@ -79,7 +79,7 @@ public:
     void move(float elapsedTimeF);
     
 
-    void rotateTowardsMouse(sf::RenderWindow& window);
+    void rotateTowardOrigin(float x, float y);
     void setRotation(float angle);
 
     virtual void OnCollisionEnter(gameObject* object);

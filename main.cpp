@@ -48,7 +48,7 @@ int main()
 
         window.clear();
         myBrick.drawShape(window);
-        myCanon.rotateTowardsMouse(window);
+        myCanon.rotateTowardOrigin(0,0.5);
 
         if (click == true)
         {
