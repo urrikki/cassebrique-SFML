@@ -218,8 +218,19 @@ void gameObject::rotateTowardOrigin(float x, float y)
     x = w * x;
     y = h * y;
     shape->setOrigin(x, y);
-    shape->setRotation(angle);
 };
+
+//int gameObject::getAngleMouse(sf::RenderWindow& window)
+//{
+//    sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+//
+//    dx = mousePosition.x - this->x;
+//    dy = mousePosition.y - this->y;
+//
+//    angle = std::atan2(dy, dx) * 180 / M_PI; 
+//    
+//    return angle;
+//};
 
 void gameObject::setRotation(float angle)
 {

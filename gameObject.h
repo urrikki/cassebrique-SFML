@@ -80,6 +80,7 @@ public:
     
 
     void rotateTowardOrigin(float x, float y);
+    int getAngleMouse(sf::RenderWindow& window);
     void setRotation(float angle);
 
     virtual void OnCollisionEnter(gameObject* object);

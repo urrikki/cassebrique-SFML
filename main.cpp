@@ -29,6 +29,7 @@ int main()
 
     while (window.isOpen())
     {
+        //EVENT
         Event event;
         while (window.pollEvent(event))
         {
@@ -40,16 +41,13 @@ int main()
                 {
                     click = true;
                 }
-            
             }
-
         }
         
+        //UPDATE
 
-        window.clear();
-        myBrick.drawShape(window);
+
         myCanon.rotateTowardOrigin(0,0.5);
-
         if (click == true)
         {
             if (shot == false)
@@ -58,17 +56,21 @@ int main()
                 myBall.setOrientation(std::cos(myCanon.angle * M_PI / 180.0f) , std::sin(myCanon.angle * M_PI / 180.0f));
                 shot = true;
             }
-            myBall.drawShape(window);
             myBall.move(elaspedTimeF);
             myBrick.OnCollisionEnter(&myBall);
             myBall.OnCollisionEnter(&myBrick);
-              
         }
-        myCanon.drawShape(window);
         
+        //DRAW
+        window.clear();
+
+        myBrick.drawShape(window);
+        myCanon.drawShape(window);
+        myBall.drawShape(window);
+
         window.display();
 
-
+        //Compute dT
         Time elapsedTime = clock.restart();
         elaspedTimeF = elapsedTime.asSeconds();
     }
