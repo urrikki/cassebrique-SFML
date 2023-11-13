@@ -70,6 +70,18 @@ void gameObject::setPosition(float x, float y)
     shape->setPosition(x, y);
 };
 
+void gameObject::setSizeRec(int w, int h)
+{
+    this->w = w;
+    this->h = h;
+    dynamic_cast<sf::RectangleShape*>(shape)->setSize(sf::Vector2f(w, h));
+}
+
+void gameObject::setSizeCir(float r)
+{
+    this->r = r;
+}
+
 float gameObject::getX()
 {
     return x;

@@ -96,4 +96,8 @@ public:
     virtual void OnCollisionExit();
 
     bool isShapeOnScreen(sf::RenderWindow& window);
+
+    void setSizeRec(int w, int h);
+
+    void setSizeCir(float r);
 };

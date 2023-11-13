@@ -8,6 +8,7 @@ GameManager::GameManager() : window(sf::VideoMode(1280, 720), "SFML works!")
 {
     myBall.initBall();
     myCanon.rotateTowardOrigin(0.5, 0.5);
+    myLevel.loadLevel(1);
 }
 
 
@@ -81,12 +82,19 @@ void GameManager::update(float elapsedTime)
 
         myBall.move(elapsedTime);
 
-        myBrick.OnCollisionEnter(&myBall);
-        myBrick.OnCollisionStay();
-        myBrick.OnCollisionExit();
-        myBall.OnCollisionEnter(&myBrick);
-        myBall.OnCollisionStay();
-        myBall.OnCollisionExit();
+        
+        for (int i = 0; i < myLevel.numColBrick; ++i) {
+            for (int j = 0; j < myLevel.numLigneBrick; ++j) {
+
+                myLevel.brickGrid[i][j].OnCollisionEnter(&myBall);
+                myLevel.brickGrid[i][j].OnCollisionStay();
+                myLevel.brickGrid[i][j].OnCollisionExit();
+                myBall.OnCollisionEnter(&myLevel.brickGrid[i][j]);
+                myBall.OnCollisionStay();
+                myBall.OnCollisionExit();
+            }
+        }
+        
 
         if (myBall.isShapeOnScreen(window) == false)
         {
@@ -102,7 +110,7 @@ void GameManager::draw()
 {
     window.clear();
 
-    myBrick.drawShape(window);
+    myLevel.drawLevel(window);
     myBall.drawShape(window);
     myCanon.drawShape(window);
 
