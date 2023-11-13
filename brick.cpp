@@ -1,10 +1,11 @@
 #include "brick.h"
+
 #include <vector>
 #include<iostream>
 
 using namespace sf;
 
-Brick::Brick() : gameObject(80, 30, 640, 360, Color::Cyan)
+Brick::Brick() : gameObject(80, 20, 640, 360, Color::Cyan)
 {
     life = 3;
 };

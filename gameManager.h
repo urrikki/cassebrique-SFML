@@ -1,9 +1,11 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include "brick.h" 
 #include "ball.h"
 #include "canon.h"
 #include "test.h"
+#include "levelManager.h"
+
+#include <SFML/Graphics.hpp>
 
 class GameManager
 {
@@ -28,4 +30,5 @@ private:
     Brick myBrick;
     Ball myBall;
     Canon myCanon;
+    LevelManager myLevel;
 };

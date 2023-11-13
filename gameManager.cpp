@@ -45,6 +45,8 @@ void GameManager::processEvents()
 
 void GameManager::update(float elapsedTime)
 {
+    myLevel.loadLevel(1);
+
     sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
     float dx = mousePosition.x - myCanon.x;
@@ -81,9 +83,15 @@ void GameManager::update(float elapsedTime)
 
         myBall.move(elapsedTime);
 
-        myBrick.OnCollisionEnter(&myBall);
-        myBrick.OnCollisionStay();
-        myBrick.OnCollisionExit();
+        for (int i = 0; i < row; ++i) {
+            for (int j = 0; j < col; ++j) {
+                myBrick.OnCollisionEnter(&myBall);
+                myBrick.OnCollisionStay();
+                myBrick.OnCollisionExit();
+            }
+        }
+
+        
         myBall.OnCollisionEnter(&myBrick);
         myBall.OnCollisionStay();
         myBall.OnCollisionExit();
@@ -101,8 +109,7 @@ void GameManager::update(float elapsedTime)
 void GameManager::draw()
 {
     window.clear();
-
-    myBrick.drawShape(window);
+    myLevel.drawLevel(window);
     myBall.drawShape(window);
     myCanon.drawShape(window);
 
