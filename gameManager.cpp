@@ -47,8 +47,8 @@ void GameManager::update(float elapsedTime)
 {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
-    float dx = mousePosition.x - myBrick.x;
-    float dy = mousePosition.y - myBrick.y;
+    float dx = mousePosition.x - myCanon.x;
+    float dy = mousePosition.y - myCanon.y;
 
     float angle = std::atan2(dy, dx) * 180 / M_PI;
 
