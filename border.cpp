@@ -1,18 +1,19 @@
-#include "brick.h"
+#include "border.h"
 #include <vector>
 #include<iostream>
 
 using namespace sf;
 
-Brick::Brick() : gameObject(80, 30, 640, 360, Color::Cyan)
+Border::Border() : gameObject(20, 100, 0, 0, Color::Cyan)
 {
     life = 3;
 };
 
-void Brick::OnCollisionEnter(gameObject* object)
+void Border::OnCollisionEnter(gameObject* object)
 {
     if (getCollideSide(object) != CollideSide::None)
     {
         setColor(Color::Green);
     }
 }
+

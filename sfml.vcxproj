@@ -136,17 +136,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ball.cpp" />
+    <ClCompile Include="border.cpp" />
     <ClCompile Include="brick.cpp" />
     <ClCompile Include="canon.cpp" />
+    <ClCompile Include="gameManager.cpp" />
     <ClCompile Include="gameObject.cpp" />
+    <ClCompile Include="levelManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ball.h" />
+    <ClInclude Include="border.h" />
     <ClInclude Include="brick.h" />
     <ClInclude Include="canon.h" />
+    <ClInclude Include="gameManager.h" />
     <ClInclude Include="gameObject.h" />
+    <ClInclude Include="levelManager.h" />
     <ClInclude Include="test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

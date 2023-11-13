@@ -19,7 +19,7 @@ typedef enum ShapeType
     Circle,
 };
 
-namespace sf 
+namespace sf
 {
     class Shape;
     class RenderWindow;
@@ -28,7 +28,7 @@ namespace sf
 
 class gameObject
 {
-private: 
+private:
     float dx;
     float dy;
 
@@ -42,6 +42,8 @@ public:
     float x;
     float y;
     float angle;
+
+    bool isCollide;
 
     sf::Shape* shape;
     ShapeType shapeType;
@@ -79,7 +81,6 @@ public:
     void move(float elapsedTimeF);
 
     void rotateTowardOrigin(float x, float y);
-    int getAngleMouse(sf::RenderWindow& window);
     void setRotation(float angle);
 
     virtual void OnCollisionEnter(gameObject* object);

@@ -34,6 +34,8 @@ gameObject::gameObject(int w, int h, float x, float y, sf::Color color)
     }
     shape->setPosition(x, y);
     shape->setFillColor(m_color);
+
+    isCollide = false;
 }
 
 
@@ -51,6 +53,8 @@ gameObject::gameObject(float r, float x, float y, sf::Color color)
     shape = new CircleShape(r);
     shape->setPosition(x, y);
     shape->setFillColor(m_color);
+
+    isCollide = false;
 }
 
 
@@ -105,7 +109,7 @@ float gameObject::getRadius()
 
 
 void gameObject::drawShape(RenderWindow& window)
-{ 
+{
     window.draw(*shape);
 };
 
@@ -141,7 +145,7 @@ void gameObject::move(float elapsedTimeF)
 {
     float newX = x + (speed * (elapsedTimeF * orientationX));
     float newY = y + (speed * (elapsedTimeF * orientationY));
-    setPosition(newX , newY );
+    setPosition(newX, newY);
 }
 
 
@@ -160,7 +164,7 @@ CollideSide gameObject::getCollideSide(gameObject* objectTest) {
         objectTest->h = objectTest->r;
     }
 
-    
+
     if (
         /*verif pour x*/(x > objectTest->x && x < (objectTest->x + objectTest->w) || x + w > objectTest->x && x + w < (objectTest->x + objectTest->w))
         &&
@@ -171,7 +175,7 @@ CollideSide gameObject::getCollideSide(gameObject* objectTest) {
         /*verif pour y*/ (objectTest->y > y && objectTest->y < (y + h) || objectTest->y + objectTest->h > y && objectTest->y + objectTest->h < (y + h))
         )
     {
-        
+
         // Stock résultats dans la structure       
         distanceResult results[] = {
             distanceResult("rtol", std::abs(x + w - objectTest->x)),
@@ -215,22 +219,10 @@ CollideSide gameObject::getCollideSide(gameObject* objectTest) {
 // Rotation
 void gameObject::rotateTowardOrigin(float x, float y)
 {
-    x = w * x;
-    y = h * y;
-    shape->setOrigin(x, y);
-};
-
-//int gameObject::getAngleMouse(sf::RenderWindow& window)
-//{
-//    sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-//
-//    dx = mousePosition.x - this->x;
-//    dy = mousePosition.y - this->y;
-//
-//    angle = std::atan2(dy, dx) * 180 / M_PI; 
-//    
-//    return angle;
-//};
+    float newX = this->w * x;
+    float newY = this->h * y;
+    shape->setOrigin(newX, newY);
+}
 
 void gameObject::setRotation(float angle)
 {
@@ -240,7 +232,7 @@ void gameObject::setRotation(float angle)
 
 void gameObject::OnCollisionEnter(gameObject* object)
 {
-    
+
 }
 
 void gameObject::OnCollisionStay()
@@ -267,7 +259,7 @@ bool gameObject::isShapeOnScreen(sf::RenderWindow& window)
 
     // Vérifiez si la shape est entièrement à l'intérieur de l'écran
     if (shapeLeft >= 0 && shapeTop >= 0 && shapeRight <= windowWidth && shapeBottom <= windowHeight)
-    {      
+    {
         return true;
     }
     else

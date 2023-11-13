@@ -1,12 +1,12 @@
 #pragma once
 #include "gameObject.h"
 
-class Brick : public gameObject
+class Border : public gameObject
 {
 public:
     int life;
 
-    Brick();
+    Border();
 
     void OnCollisionEnter(gameObject* object) override;
 
