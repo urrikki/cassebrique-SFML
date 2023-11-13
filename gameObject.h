@@ -2,6 +2,14 @@
 
 #include <SFML/Graphics/Color.hpp>
 
+typedef enum CollideType
+{
+    NoCollide,
+    Enter,
+    Stay,
+    Exit,
+};
+
 typedef enum CollideSide
 {
     None,
@@ -43,7 +51,7 @@ public:
     float y;
     float angle;
 
-    bool isCollide;
+    CollideType Collide;
 
     sf::Shape* shape;
     ShapeType shapeType;

@@ -11,8 +11,30 @@ Brick::Brick() : gameObject(80, 30, 640, 360, Color::Cyan)
 
 void Brick::OnCollisionEnter(gameObject* object)
 {
-    if (getCollideSide(object) != CollideSide::None)
+    getCollideSide(object);
+    if (Collide == CollideType::Enter)
     {
-        setColor(Color::Green);
+        life - 3;
+        setColor(sf::Color::Color(250,0,0));
+        Collide = Stay;
+    }
+}
+
+void Brick::OnCollisionStay()
+{
+    while (Collide == CollideType::Stay)
+    {
+        if (true)
+        {
+            Collide = Exit;
+        }
+    }
+}
+
+void Brick::OnCollisionExit()
+{
+    if (Collide == CollideType::Exit)
+    {
+        Collide = NoCollide;
     }
 }

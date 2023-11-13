@@ -80,8 +80,14 @@ void GameManager::update(float elapsedTime)
         }
 
         myBall.move(elapsedTime);
+
         myBrick.OnCollisionEnter(&myBall);
+        myBrick.OnCollisionStay();
+        myBrick.OnCollisionExit();
         myBall.OnCollisionEnter(&myBrick);
+        myBall.OnCollisionStay();
+        myBall.OnCollisionExit();
+
         if (myBall.isShapeOnScreen(window) == false)
         {
             myBall.setPosition(myCanon.x, myCanon.y);

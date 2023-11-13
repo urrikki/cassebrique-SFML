@@ -11,9 +11,30 @@ Border::Border() : gameObject(20, 100, 0, 0, Color::Cyan)
 
 void Border::OnCollisionEnter(gameObject* object)
 {
-    if (getCollideSide(object) != CollideSide::None)
+    if (Collide == CollideType::Enter)
     {
-        setColor(Color::Green);
+        life - 3;
+        setColor(sf::Color::Color(250, 0, 0));
+        Collide = Stay;
+    }
+}
+
+void Border::OnCollisionStay()
+{
+    while (Collide == CollideType::Stay)
+    {
+        if (true)
+        {
+            Collide = Exit;
+        }
+    }
+}
+
+void Border::OnCollisionExit()
+{
+    if (Collide == CollideType::Exit)
+    {
+        Collide = NoCollide;
     }
 }
 

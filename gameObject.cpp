@@ -35,7 +35,7 @@ gameObject::gameObject(int w, int h, float x, float y, sf::Color color)
     shape->setPosition(x, y);
     shape->setFillColor(m_color);
 
-    isCollide = false;
+    Collide = NoCollide;
 }
 
 
@@ -54,7 +54,7 @@ gameObject::gameObject(float r, float x, float y, sf::Color color)
     shape->setPosition(x, y);
     shape->setFillColor(m_color);
 
-    isCollide = false;
+    Collide = NoCollide;
 }
 
 
@@ -195,6 +195,7 @@ CollideSide gameObject::getCollideSide(gameObject* objectTest) {
             }
         }
 
+        Collide = Enter;
         if (testDistance == "rtol") {
             std::cout << "Right";
             return Right;
