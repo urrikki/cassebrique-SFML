@@ -7,10 +7,12 @@
 GameManager::GameManager() : window(sf::VideoMode(1280, 720), "SFML works!")
 {
     score = 0;
+    nbrShoot = 0; 
     myBall.initBall();
     myCanon.rotateTowardOrigin(0.5, 0.5);
     myLevel.loadLevel(1);
-    myText.addText(" Score : " + std::to_string(score), 1150, 650, sf::Color::White, 17);
+    myText.addText(" Score : " + std::to_string(score), 1150, 640, sf::Color::White, 17);
+    myText.addText(" Shoot n°" + std::to_string(nbrShoot), 1150, 670, sf::Color::White, 17);
 
     if (!buffer.loadFromFile("audio/background.mp3"))
     {
@@ -86,6 +88,9 @@ void GameManager::update(float elapsedTime)
     {
         if (shot == false)
         {
+            ++nbrShoot;
+            myText.setContent(1, " Shoot n°" + std::to_string(nbrShoot)); 
+            
             myBall.setPosition(myCanon.x, myCanon.y);
             myBall.setOrientation(dx, dy);
             shot = true;
@@ -110,14 +115,19 @@ void GameManager::update(float elapsedTime)
 
                  if (myLevel.brickGrid[i][j].Collide == CollideType::Stay)
                 {
-                    score = score + 10;
+                    score = score + (10/nbrShoot);
                     myText.setContent(0, " Score : " + std::to_string(score));
-                    std::cout << score << std::endl;
                 }
 
                 myLevel.brickGrid[i][j].OnCollisionStay();
                 myBall.OnCollisionStay();
                 
+                if (myLevel.brickGrid[i][j].Collide == CollideType::Exit)
+                {
+                    score = score + (100/nbrShoot);
+                    myText.setContent(0, " Score : " + std::to_string(score));
+                }
+
                 myLevel.brickGrid[i][j].OnCollisionExit();
                 myBall.OnCollisionExit();
 
