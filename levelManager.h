@@ -19,6 +19,5 @@ public:
     void loadBorder();
     std::vector<Border> borderGrid;
     int numBorder;
-    void DrawBorder(sf::RenderWindow& window);
-    
+    void drawBorder(sf::RenderWindow& window);
 };
