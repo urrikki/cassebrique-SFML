@@ -2,6 +2,7 @@
 
 #include <vector>
 #include<iostream>
+#include <string>
 
 using namespace sf;
 
@@ -16,7 +17,8 @@ void Brick::OnCollisionEnter(gameObject* object)
     if (Collide == CollideType::Enter)
     {
         life - 3;
-        setColor(sf::Color::Color(250,0,0));
+        setColor(sf::Color::Color(88,50,168));
+        std::cout << "color" << std::endl;
         Collide = Stay;
     }
 }

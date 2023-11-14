@@ -1,12 +1,14 @@
 #define _USE_MATH_DEFINES
 
 #include "gameManager.h"
+
 #include<iostream>
 #include <cmath>
 
 GameManager::GameManager() : window(sf::VideoMode(1280, 720), "SFML works!")
 {
     myBall.initBall();
+    myLevel.loadLevel(1);
     myCanon.rotateTowardOrigin(0.5, 0.5);
 }
 
@@ -45,7 +47,6 @@ void GameManager::processEvents()
 
 void GameManager::update(float elapsedTime)
 {
-    myLevel.loadLevel(1);
 
     sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
@@ -83,18 +84,18 @@ void GameManager::update(float elapsedTime)
 
         myBall.move(elapsedTime);
 
-        for (int i = 0; i < row; ++i) {
-            for (int j = 0; j < col; ++j) {
-                myBrick.OnCollisionEnter(&myBall);
-                myBrick.OnCollisionStay();
-                myBrick.OnCollisionExit();
+        for (int i = 0; i < myLevel.row; ++i) {
+            for (int j = 0; j < myLevel.col; ++j) {
+                myLevel.brickGrid[i][j].OnCollisionEnter(&myBall);
+                myLevel.brickGrid[i][j].OnCollisionStay();
+                myLevel.brickGrid[i][j].OnCollisionExit();
+                myBall.OnCollisionEnter(&myLevel.brickGrid[i][j]);
+                myBall.OnCollisionStay();
+                myBall.OnCollisionExit();
             }
         }
 
         
-        myBall.OnCollisionEnter(&myBrick);
-        myBall.OnCollisionStay();
-        myBall.OnCollisionExit();
 
         if (myBall.isShapeOnScreen(window) == false)
         {

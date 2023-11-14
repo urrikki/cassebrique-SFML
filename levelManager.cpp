@@ -40,7 +40,7 @@ void LevelManager::drawLevel(sf::RenderWindow& window)
 	}
 }
 
-void LevelManager::clearGrid() 
+void LevelManager::clearGrid()
 {
 	brickGrid.clear();
 }
