@@ -48,7 +48,7 @@ void LevelManager::loadLevel(int levelNumber) {
     for (int i = 0; i < numColBrick; ++i) {
         for (int j = 0; j < numLigneBrick; ++j) {
             brickGrid[i][j] = Brick();
-            brickGrid[i][j].setPosition(200 + (i * 90), 60 + (j * 40));
+            brickGrid[i][j].setPosition(200.0 + (i * 90.0), 60.0 + (j * 40));
             brickGrid[i][j].setColor(sf::Color::Cyan);
         }
     }  

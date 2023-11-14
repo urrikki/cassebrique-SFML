@@ -44,8 +44,8 @@ public:
     gameObject(int w, int h, float x, float y, sf::Color color);
     gameObject(float r, float x, float y, sf::Color color);
 
-    int w;
-    int h;
+    float w;
+    float h;
     float r;
     float x;
     float y;
