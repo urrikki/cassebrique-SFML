@@ -49,7 +49,7 @@ void LevelManager::loadLevel(int levelNumber) {
         for (int j = 0; j < numLigneBrick; ++j) {
             brickGrid[i][j] = Brick();
             brickGrid[i][j].setPosition(100 + (i * 100), 100 + (j * 100));
-            brickGrid[i][j].setColor(sf::Color::Green);
+            brickGrid[i][j].setColor(sf::Color::Cyan);
         }
     }  
     
