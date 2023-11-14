@@ -9,15 +9,12 @@ GameManager::GameManager() : window(sf::VideoMode(1280, 720), "SFML works!")
     myBall.initBall();
     myCanon.rotateTowardOrigin(0.5, 0.5);
     myLevel.loadLevel(1);
-    myText.addText(" Score :", 1150, 650, sf::Color::White, 17);
-
-}
-
+    myText.addText(" Score :" + std::to_string(score), 1150, 650, sf::Color::White, 17);
     if (!buffer.loadFromFile("audio/background.mp3"))
     {
         std::cout << "miaouu" << std::endl;
     }
-     
+
 }
 
 
@@ -50,6 +47,7 @@ void GameManager::processEvents()
             {
                 if (myCanon.angle <= 0)
                 {
+                    nbrShoot = nbrShoot + 1;
                     click = true;
                 }    
             }
@@ -109,9 +107,19 @@ void GameManager::update(float elapsedTime)
                 myLevel.brickGrid[i][j].OnCollisionEnter(&myBall);
                 myBall.OnCollisionEnter(&myLevel.brickGrid[i][j]);
                 
+                if (myLevel.brickGrid[i][j].Collide == CollideType::Stay)
+                {
+                    score = score + (10 / nbrShoot);
+                }
+
                 myLevel.brickGrid[i][j].OnCollisionStay();
                 myBall.OnCollisionStay();
                 
+                if (myLevel.brickGrid[i][j].Collide == CollideType::Exit)
+                {
+                    score = score + (100 / nbrShoot);
+                }
+
                 myLevel.brickGrid[i][j].OnCollisionExit();
                 myBall.OnCollisionExit();
 
@@ -147,3 +155,4 @@ void GameManager::draw()
 
     window.display();
 }
+
