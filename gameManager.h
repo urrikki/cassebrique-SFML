@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <string>
 
 #include "levelManager.h"
 #include "textManager.h"
@@ -13,12 +14,12 @@ class GameManager
 {
 public:
     GameManager();
-
     void runGame();
 
 private:
     void processEvents();
     void update(float elapsedTime);
+    std::string gameScore();
     void draw();
 
 private:

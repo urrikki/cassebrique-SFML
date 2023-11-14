@@ -18,8 +18,8 @@ GameManager::GameManager() : window(sf::VideoMode(1280, 720), "SFML works!")
     {
         std::cout << "miaouu" << std::endl;
     }
-}
 
+}
 
 
 void GameManager::runGame()
@@ -51,6 +51,7 @@ void GameManager::processEvents()
             {
                 if (myCanon.angle <= 0)
                 {
+                    nbrShoot = nbrShoot + 1;
                     click = true;
                 }    
             }
@@ -115,7 +116,7 @@ void GameManager::update(float elapsedTime)
 
                  if (myLevel.brickGrid[i][j].Collide == CollideType::Stay)
                 {
-                    score = score + (10/nbrShoot);
+                    score = score + (10 / nbrShoot);
                     myText.setContent(0, " Score : " + std::to_string(score));
                 }
 
@@ -165,3 +166,4 @@ void GameManager::draw()
 
     window.display();
 }
+
