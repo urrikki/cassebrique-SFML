@@ -4,10 +4,9 @@
 
 using namespace sf;
 
-Brick::Brick() : gameObject(80, 30, 640, 360, Color::Cyan)
+Brick::Brick() : gameObject(70, 20, 640, 360, Color::Cyan)
 {
-    life = 3;
-    isGhost = false;
+    life = 4;
 };
 
 void Brick::OnCollisionEnter(gameObject* object)
