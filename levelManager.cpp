@@ -58,7 +58,7 @@ void LevelManager::loadLevel(int levelNumber) {
 
 void LevelManager::drawLevel(sf::RenderWindow& window) {
     
-    DrawBorder(window);
+    drawBorder(window);
     for (int i = 0; i < numColBrick; ++i) {
         for (int j = 0; j < numLigneBrick; ++j) {
             brickGrid[i][j].drawShape(window);     
@@ -67,7 +67,7 @@ void LevelManager::drawLevel(sf::RenderWindow& window) {
     
 }
 
-void LevelManager::DrawBorder(sf::RenderWindow& window)
+void LevelManager::drawBorder(sf::RenderWindow& window)
 {
     for (int i = 0; i < numBorder; ++i) {
         borderGrid[i].drawShape(window);
