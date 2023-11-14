@@ -9,6 +9,8 @@ GameManager::GameManager() : window(sf::VideoMode(1280, 720), "SFML works!")
     myBall.initBall();
     myCanon.rotateTowardOrigin(0.5, 0.5);
     myLevel.loadLevel(1);
+    myText.addText(" Score :", 1150, 650, sf::Color::White, 17);
+
 }
 
 
@@ -128,6 +130,7 @@ void GameManager::draw()
     myLevel.drawLevel(window);
     myBall.drawShape(window);
     myCanon.drawShape(window);
+    myText.draw(window);
 
     window.display();
 }

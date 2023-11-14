@@ -144,6 +144,7 @@
     <ClCompile Include="levelManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="textManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ball.h" />
@@ -154,6 +155,7 @@
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="levelManager.h" />
     <ClInclude Include="test.h" />
+    <ClInclude Include="textManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

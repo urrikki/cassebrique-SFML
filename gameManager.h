@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "levelManager.h"
+#include "textManager.h"
 #include "brick.h" 
 #include "ball.h"
 #include "canon.h"
@@ -27,8 +28,11 @@ private:
     float elapsedTime = 0.0;
     bool print = false;
 
+    int score;
+
     Brick myBrick;
     Ball myBall;
     Canon myCanon;
     LevelManager myLevel;
+    TextManager myText;
 };

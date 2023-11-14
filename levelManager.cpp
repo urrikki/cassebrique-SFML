@@ -16,22 +16,22 @@ LevelManager::LevelManager(){
 void LevelManager::loadBorder()
 {
     borderGrid.resize(numBorder);
-    //repopulez les borders
 
+    //Repopulez les borders
     borderGrid[0] = Border();
     borderGrid[0].setPosition(145, 0);
     borderGrid[0].setSizeRec(995, 15);
-    borderGrid[0].setColor(sf::Color::White);
+    borderGrid[0].setColor(sf::Color(180,180,200));
 
     borderGrid[1] = Border();
     borderGrid[1].setPosition(145, 15);
     borderGrid[1].setSizeRec(20, 700);
-    borderGrid[1].setColor(sf::Color::White);
+    borderGrid[1].setColor(sf::Color(180, 180, 200));
 
     borderGrid[2] = Border();
     borderGrid[2].setPosition(1120, 15);
     borderGrid[2].setSizeRec(20, 700);
-    borderGrid[2].setColor(sf::Color::White);
+    borderGrid[2].setColor(sf::Color(180, 180, 200));
 
 }
 
