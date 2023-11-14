@@ -51,7 +51,6 @@ void GameManager::processEvents()
             {
                 if (myCanon.angle <= 0)
                 {
-                    nbrShoot = nbrShoot + 1;
                     click = true;
                 }    
             }
@@ -114,7 +113,7 @@ void GameManager::update(float elapsedTime)
                 myLevel.brickGrid[i][j].OnCollisionEnter(&myBall);
                 myBall.OnCollisionEnter(&myLevel.brickGrid[i][j]);
 
-                 if (myLevel.brickGrid[i][j].Collide == CollideType::Stay)
+                if (myLevel.brickGrid[i][j].Collide == CollideType::Stay)
                 {
                     score = score + (10 / nbrShoot);
                     myText.setContent(0, " Score : " + std::to_string(score));
@@ -122,12 +121,15 @@ void GameManager::update(float elapsedTime)
 
                 myLevel.brickGrid[i][j].OnCollisionStay();
                 myBall.OnCollisionStay();
-                
                 if (myLevel.brickGrid[i][j].Collide == CollideType::Exit)
                 {
-                    score = score + (100/nbrShoot);
-                    myText.setContent(0, " Score : " + std::to_string(score));
+                    if (myLevel.brickGrid[i][j].life == 0)
+                    {
+                        score = score + (100/nbrShoot);
+                        myText.setContent(0, " Score : " + std::to_string(score));
+                    }
                 }
+                
 
                 myLevel.brickGrid[i][j].OnCollisionExit();
                 myBall.OnCollisionExit();
