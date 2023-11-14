@@ -12,7 +12,6 @@ TextManager::TextManager()
 
 void TextManager::addText(std::string content, float x, float y, sf::Color color, int size) 
 {
-    sf::Text text;
     text.setString(content);
     text.setPosition(x,y);
     text.setFillColor(color);
@@ -23,7 +22,7 @@ void TextManager::addText(std::string content, float x, float y, sf::Color color
 
 void TextManager::setContent(size_t index, std::string newContent)
 {
-    text.setString(newContent);
+    texts[index].setString(newContent);
 }
 
 void TextManager::draw(sf::RenderWindow& window)
