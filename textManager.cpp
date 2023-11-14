@@ -5,7 +5,7 @@
 
 TextManager::TextManager()
 {
-    if (!font.loadFromFile("arial.ttf")) {
+    if (!font.loadFromFile("pixellettersfull.ttf")) {
         std::cout << "Erreur lors du chargement de la police." << std::endl;
     }
 }
