@@ -174,8 +174,8 @@ CollideSide gameObject::getCollideSide(gameObject* objectTest) {
     {
         if (getShapeType() == ShapeType::Circle)
         {
-            w = r;
-            h = r;
+            this->w = r;
+            this->h = r;
         }
 
         if (objectTest->getShapeType() == ShapeType::Circle)
@@ -186,13 +186,13 @@ CollideSide gameObject::getCollideSide(gameObject* objectTest) {
 
 
         if (
-            /*verif pour x*/(x > objectTest->x && x < (objectTest->x + objectTest->w) || x + w > objectTest->x && x + w < (objectTest->x + objectTest->w))
+            /*verif pour x*/(x >= objectTest->x && x <= (objectTest->x + objectTest->w) || (x + w) >= objectTest->x && (x + w) <= (objectTest->x + objectTest->w))
             &&
-            /*verif pour y*/ (y > objectTest->y && y < (objectTest->y + objectTest->h) || y + h > objectTest->y && y + h < (objectTest->y + objectTest->h))
+            /*verif pour y*/ (y >= objectTest->y && y <= (objectTest->y + objectTest->h) || (y + h) >= objectTest->y && (y + h) <= (objectTest->y + objectTest->h))
             ||
-            /*verif pour x*/(objectTest->x > x && objectTest->x < (x + w) || objectTest->x + objectTest->w > x && objectTest->x + objectTest->w < (x + w))
+            /*verif pour x*/(objectTest->x >= x && objectTest->x <= (x + w) || objectTest->x + objectTest->w >= x && objectTest->x + objectTest->w <= (x + w))
             &&
-            /*verif pour y*/ (objectTest->y > y && objectTest->y < (y + h) || objectTest->y + objectTest->h > y && objectTest->y + objectTest->h < (y + h))
+            /*verif pour y*/ (objectTest->y >= y && objectTest->y <= (y + h) || objectTest->y + objectTest->h >= y && objectTest->y + objectTest->h <= (y + h))
             )
         {
 

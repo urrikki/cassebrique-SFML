@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 #include "levelManager.h"
 #include "textManager.h"
@@ -23,6 +24,8 @@ private:
 private:
     sf::RenderWindow window;
     sf::Clock clock;
+    sf::SoundBuffer buffer;
+
     bool click = false;
     bool shot = false;
     float elapsedTime = 0.0;

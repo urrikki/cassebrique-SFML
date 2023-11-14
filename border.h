@@ -4,7 +4,6 @@
 class Border : public gameObject
 {
 public:
-    int life;
 
     Border();
 

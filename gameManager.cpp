@@ -13,11 +13,23 @@ GameManager::GameManager() : window(sf::VideoMode(1280, 720), "SFML works!")
 
 }
 
+    if (!buffer.loadFromFile("audio/background.mp3"))
+    {
+        std::cout << "miaouu" << std::endl;
+    }
+     
+}
+
 
 void GameManager::runGame()
 {
+    sf::Sound sound;
+    sound.setBuffer(buffer);
+    sound.play();
+
     while (window.isOpen())
     {
+        
         processEvents();
         elapsedTime = clock.restart().asSeconds();
         update(elapsedTime);
@@ -60,7 +72,8 @@ void GameManager::update(float elapsedTime)
 
     if (print == true)
     {
-        std::cout << myCanon.angle << std::endl;
+        std::cout << myBall.x + myBall.r << std::endl;
+        std::cout << myBall.y << std::endl;
         print = false;
     }
 
