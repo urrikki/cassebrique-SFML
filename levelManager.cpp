@@ -39,7 +39,7 @@ void LevelManager::loadLevel(int levelNumber) {
     if (levelNumber == 1) {
         // Réinitialisez ou ajustez la taille de votre grille pour le niveau 1
         this->numColBrick = 10;
-        this->numLigneBrick = 3;
+        this->numLigneBrick = 6;
     }
 
     brickGrid.resize(numColBrick, std::vector<Brick>(numLigneBrick));
@@ -48,7 +48,7 @@ void LevelManager::loadLevel(int levelNumber) {
     for (int i = 0; i < numColBrick; ++i) {
         for (int j = 0; j < numLigneBrick; ++j) {
             brickGrid[i][j] = Brick();
-            brickGrid[i][j].setPosition(100 + (i * 100), 100 + (j * 100));
+            brickGrid[i][j].setPosition(200 + (i * 90), 60 + (j * 40));
             brickGrid[i][j].setColor(sf::Color::Cyan);
         }
     }  
