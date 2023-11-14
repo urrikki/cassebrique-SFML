@@ -12,6 +12,6 @@ public:
     void OnCollisionStay() override;
     void OnCollisionExit() override;
 
-    void destroyBrick();
+    void lifeBrick();
 
 };

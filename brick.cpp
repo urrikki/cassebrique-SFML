@@ -15,15 +15,6 @@ void Brick::OnCollisionEnter(gameObject* object)
     if (Collide == CollideType::Enter)
     {
         this->life = life - 1;
-        if (life == 3) {
-            setColor(sf::Color(60, 250, 0)); // Green
-        }
-        else if (life == 2) {
-            setColor(sf::Color(120,90,210)); //Purple
-        }
-        else if (life == 1) {
-            setColor(sf::Color::Yellow); // Yellow
-        }
         Collide = Stay;
     }
 }
@@ -43,14 +34,23 @@ void Brick::OnCollisionExit()
 {
     if (Collide == CollideType::Exit)
     {
-        destroyBrick();
+        lifeBrick();
         Collide = NoCollide;
     }
 }
 
-void Brick::destroyBrick()
+void Brick::lifeBrick()
 {
-    if (life <= 0)
+    if (life == 3) {
+        setColor(sf::Color(60, 250, 0)); // Green
+    }
+    else if (life == 2) {
+        setColor(sf::Color(120, 90, 210)); //Purple
+    }
+    else if (life == 1) {
+        setColor(sf::Color::Yellow); // Yellow
+    }
+    else if (life <= 0)
     {
         isActive = false;
         setPosition(3000, 0);
