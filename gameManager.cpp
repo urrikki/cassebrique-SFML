@@ -10,6 +10,8 @@ GameManager::GameManager() : window(sf::VideoMode(1280, 720), "SFML works!")
     myBall.initBall();
     myLevel.loadLevel(1);
     myCanon.rotateTowardOrigin(0.5, 0.5);
+    myBorder.initBorder(0, 0);
+    myBorder.initBorder(500, 500);
 }
 
 

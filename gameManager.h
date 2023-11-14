@@ -3,6 +3,7 @@
 #include "ball.h"
 #include "canon.h"
 #include "test.h"
+#include "border.h"
 #include "levelManager.h"
 
 #include <SFML/Graphics.hpp>
@@ -31,4 +32,5 @@ private:
     Ball myBall;
     Canon myCanon;
     LevelManager myLevel;
+    Border myBorder;
 };
