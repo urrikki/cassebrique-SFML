@@ -11,4 +11,8 @@ public:
     void OnCollisionEnter(gameObject* object) override;
     void OnCollisionStay() override;
     void OnCollisionExit() override;
+
+    void destroyBrick();
+
+    bool isGhost;
 };

@@ -100,4 +100,5 @@ public:
     void setSizeRec(int w, int h);
 
     void setSizeCir(float r);
+
 };

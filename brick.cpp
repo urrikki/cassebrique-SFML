@@ -7,6 +7,7 @@ using namespace sf;
 Brick::Brick() : gameObject(80, 30, 640, 360, Color::Cyan)
 {
     life = 3;
+    isGhost = false;
 };
 
 void Brick::OnCollisionEnter(gameObject* object)
@@ -14,8 +15,7 @@ void Brick::OnCollisionEnter(gameObject* object)
     getCollideSide(object);
     if (Collide == CollideType::Enter)
     {
-        life - 3;
-        setColor(sf::Color::Color(250,0,0));
+        this->life = life - 4;
         Collide = Stay;
     }
 }
@@ -35,6 +35,16 @@ void Brick::OnCollisionExit()
 {
     if (Collide == CollideType::Exit)
     {
+        destroyBrick();
         Collide = NoCollide;
     }
+}
+
+void Brick::destroyBrick()
+{
+    if (life <= 0)
+    {
+        isGhost = true;
+        setPosition(3000, 0);
+    }    
 }

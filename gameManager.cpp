@@ -34,7 +34,10 @@ void GameManager::processEvents()
         {
             if (event.mouseButton.button == sf::Mouse::Left)
             {
-                click = true;
+                if (myCanon.angle <= 0)
+                {
+                    click = true;
+                }    
             }
             else if (event.mouseButton.button == sf::Mouse::Right)
             {
@@ -51,17 +54,19 @@ void GameManager::update(float elapsedTime)
     float dx = mousePosition.x - myCanon.x;
     float dy = mousePosition.y - myCanon.y;
 
-    float angle = std::atan2(dy, dx) * 180 / M_PI;
+    myCanon.angle = std::atan2(dy, dx) * 180 / M_PI;
 
     if (print == true)
     {
-        std::cout << angle << std::endl;
+        std::cout << myCanon.angle << std::endl;
         print = false;
     }
 
-
-    myCanon.setRotation(angle);
-
+    if (myCanon.angle <= 0)
+    {
+        myCanon.setRotation(myCanon.angle);
+    }
+    
 
     if (click == true)
     {
@@ -87,12 +92,22 @@ void GameManager::update(float elapsedTime)
             for (int j = 0; j < myLevel.numLigneBrick; ++j) {
 
                 myLevel.brickGrid[i][j].OnCollisionEnter(&myBall);
-                myLevel.brickGrid[i][j].OnCollisionStay();
-                myLevel.brickGrid[i][j].OnCollisionExit();
                 myBall.OnCollisionEnter(&myLevel.brickGrid[i][j]);
+                
+                myLevel.brickGrid[i][j].OnCollisionStay();
                 myBall.OnCollisionStay();
+                
+                myLevel.brickGrid[i][j].OnCollisionExit();
                 myBall.OnCollisionExit();
+
             }
+        }
+
+        for (int i = 0; i < myLevel.numBorder; ++i)
+        {
+            myBall.OnCollisionEnter(&myLevel.borderGrid[i]);
+            myBall.OnCollisionStay();
+            myBall.OnCollisionExit();
         }
         
 
