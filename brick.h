@@ -14,5 +14,4 @@ public:
 
     void destroyBrick();
 
-    bool isGhost;
 };

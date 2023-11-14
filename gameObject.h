@@ -50,6 +50,7 @@ public:
     float x;
     float y;
     float angle;
+    bool isActive;
 
     CollideType Collide;
 

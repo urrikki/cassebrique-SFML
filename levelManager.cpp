@@ -61,10 +61,7 @@ void LevelManager::drawLevel(sf::RenderWindow& window) {
     DrawBorder(window);
     for (int i = 0; i < numColBrick; ++i) {
         for (int j = 0; j < numLigneBrick; ++j) {
-            if (brickGrid[i][j].isGhost == false)
-            {
-                brickGrid[i][j].drawShape(window);
-            }  
+            brickGrid[i][j].drawShape(window);     
         }
     }
     

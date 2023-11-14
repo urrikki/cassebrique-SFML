@@ -17,7 +17,10 @@ void Ball::OnCollisionEnter(gameObject* object)
     CollideSide side = getCollideSide(object);
     if (Collide == CollideType::Enter)
     {
+        
         rebound(side);
+        
+        
         Collide = Stay;
     }
     

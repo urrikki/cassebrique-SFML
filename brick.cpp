@@ -7,7 +7,6 @@ using namespace sf;
 Brick::Brick() : gameObject(80, 30, 640, 360, Color::Cyan)
 {
     life = 3;
-    isGhost = false;
 };
 
 void Brick::OnCollisionEnter(gameObject* object)
@@ -44,7 +43,7 @@ void Brick::destroyBrick()
 {
     if (life <= 0)
     {
-        isGhost = true;
+        isActive = false;
         setPosition(3000, 0);
     }    
 }

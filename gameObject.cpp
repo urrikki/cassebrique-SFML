@@ -36,6 +36,8 @@ gameObject::gameObject(int w, int h, float x, float y, sf::Color color)
     shape->setFillColor(m_color);
 
     Collide = NoCollide;
+
+    isActive = true;
 }
 
 
@@ -55,6 +57,7 @@ gameObject::gameObject(float r, float x, float y, sf::Color color)
     shape->setFillColor(m_color);
 
     Collide = NoCollide;
+    isActive = true;
 }
 
 
@@ -122,7 +125,10 @@ float gameObject::getRadius()
 
 void gameObject::drawShape(RenderWindow& window)
 {
-    window.draw(*shape);
+    if (isActive == true)
+    {
+        window.draw(*shape);
+    }  
 };
 
 ShapeType gameObject::getShapeType()
@@ -164,69 +170,72 @@ void gameObject::move(float elapsedTimeF)
 CollideSide gameObject::getCollideSide(gameObject* objectTest) {
     // xmin = x et xmax = x + size
     // ymin = y et ymax = y + size
-    if (getShapeType() == ShapeType::Circle)
+    if (isActive == true && objectTest->isActive == true)
     {
-        w = r;
-        h = r;
-    }
+        if (getShapeType() == ShapeType::Circle)
+        {
+            w = r;
+            h = r;
+        }
 
-    if (objectTest->getShapeType() == ShapeType::Circle)
-    {
-        objectTest->w = objectTest->r;
-        objectTest->h = objectTest->r;
-    }
+        if (objectTest->getShapeType() == ShapeType::Circle)
+        {
+            objectTest->w = objectTest->r;
+            objectTest->h = objectTest->r;
+        }
 
 
-    if (
-        /*verif pour x*/(x > objectTest->x && x < (objectTest->x + objectTest->w) || x + w > objectTest->x && x + w < (objectTest->x + objectTest->w))
-        &&
-        /*verif pour y*/ (y > objectTest->y && y < (objectTest->y + objectTest->h) || y + h > objectTest->y && y + h < (objectTest->y + objectTest->h))
-        ||
-        /*verif pour x*/(objectTest->x > x && objectTest->x < (x + w) || objectTest->x + objectTest->w > x && objectTest->x + objectTest->w < (x + w))
-        &&
-        /*verif pour y*/ (objectTest->y > y && objectTest->y < (y + h) || objectTest->y + objectTest->h > y && objectTest->y + objectTest->h < (y + h))
-        )
-    {
+        if (
+            /*verif pour x*/(x > objectTest->x && x < (objectTest->x + objectTest->w) || x + w > objectTest->x && x + w < (objectTest->x + objectTest->w))
+            &&
+            /*verif pour y*/ (y > objectTest->y && y < (objectTest->y + objectTest->h) || y + h > objectTest->y && y + h < (objectTest->y + objectTest->h))
+            ||
+            /*verif pour x*/(objectTest->x > x && objectTest->x < (x + w) || objectTest->x + objectTest->w > x && objectTest->x + objectTest->w < (x + w))
+            &&
+            /*verif pour y*/ (objectTest->y > y && objectTest->y < (y + h) || objectTest->y + objectTest->h > y && objectTest->y + objectTest->h < (y + h))
+            )
+        {
 
-        // Stock résultats dans la structure       
-        distanceResult results[] = {
-            distanceResult("rtol", std::abs(x + w - objectTest->x)),
-            distanceResult("ltor", std::abs(x - objectTest->x - objectTest->w)),
-            distanceResult("ttob", std::abs(y - objectTest->y - objectTest->h)),
-            distanceResult("btot", std::abs(y + h - objectTest->y))
-        };
+            // Stock résultats dans la structure       
+            distanceResult results[] = {
+                distanceResult("rtol", std::abs(x + w - objectTest->x)),
+                distanceResult("ltor", std::abs(x - objectTest->x - objectTest->w)),
+                distanceResult("ttob", std::abs(y - objectTest->y - objectTest->h)),
+                distanceResult("btot", std::abs(y + h - objectTest->y))
+            };
 
-        // petite distance
-        float minDistance = results[0].value;
-        std::string testDistance = results[0].name;
+            // petite distance
+            float minDistance = results[0].value;
+            std::string testDistance = results[0].name;
 
-        for (int i = 1; i < 4; i++) {
-            if (results[i].value < minDistance) {
-                minDistance = results[i].value;
-                testDistance = results[i].name;
+            for (int i = 1; i < 4; i++) {
+                if (results[i].value < minDistance) {
+                    minDistance = results[i].value;
+                    testDistance = results[i].name;
+                }
+            }
+
+            Collide = Enter;
+            if (testDistance == "rtol") {
+                std::cout << "Right";
+                return Right;
+            }
+            else if (testDistance == "ltor") {
+                std::cout << "Left";
+                return Left;
+            }
+            else if (testDistance == "ttob") {
+                std::cout << "Top";
+                return Top;
+            }
+            else if (testDistance == "btot") {
+                std::cout << "Bot";
+                return Bottom;
             }
         }
 
-        Collide = Enter;
-        if (testDistance == "rtol") {
-            std::cout << "Right";
-            return Right;
-        }
-        else if (testDistance == "ltor") {
-            std::cout << "Left";
-            return Left;
-        }
-        else if (testDistance == "ttob") {
-            std::cout << "Top";
-            return Top;
-        }
-        else if (testDistance == "btot") {
-            std::cout << "Bot";
-            return Bottom;
-        }
+        return CollideSide::None;
     }
-
-    return CollideSide::None;
 }
 
 // Rotation
