@@ -1,5 +1,7 @@
 #include "levelManager.h"
-
+#include <fstream>
+#include <sstream>
+#include <iostream>
 
 LevelManager::LevelManager(){
 
@@ -36,23 +38,60 @@ void LevelManager::loadBorder()
 }
 
 void LevelManager::loadLevel(int levelNumber) {
-    if (levelNumber == 1) {
-        // Réinitialisez ou ajustez la taille de votre grille pour le niveau 1
-        this->numColBrick = 10;
-        this->numLigneBrick = 6;
+    // Construire le chemin du dossier des niveaux
+    std::string levelFolderPath = "level/";
+
+    // Construire le nom du fichier texte du niveau
+    std::string levelFileName = levelFolderPath + "level" + std::to_string(levelNumber) + ".txt";
+
+    // Ouvrir le fichier texte du niveau
+    std::ifstream levelFile(levelFileName);
+
+    if (!levelFile.is_open()) {
+        std::cerr << "Impossible d'ouvrir le fichier du niveau : " << levelFileName << std::endl;
+        return;
     }
 
+    // Déterminer le nombre de colonnes et de lignes en fonction du fichier
+    numColBrick = 0;
+    numLigneBrick = 0;
+    std::string line;
+
+    while (std::getline(levelFile, line)) {
+        // Incrementer le nombre de lignes pour chaque ligne lue
+        ++numLigneBrick;
+
+        // Mettre à jour le nombre de colonnes si la ligne est plus longue que numColBrick actuel
+        if (line.length() > static_cast<size_t>(numColBrick)) {
+            numColBrick = static_cast<int>(line.length());
+        }
+    }
+
+    // Réinitialiser la position du curseur de fichier pour lire à partir du début
+    levelFile.clear();
+    levelFile.seekg(0, std::ios::beg);
+
+    // Allouer de l'espace pour la grille en fonction du nombre de colonnes et de lignes déterminé
     brickGrid.resize(numColBrick, std::vector<Brick>(numLigneBrick));
 
-    // Repopulez la grille avec les briques
-    for (int i = 0; i < numColBrick; ++i) {
-        for (int j = 0; j < numLigneBrick; ++j) {
-            brickGrid[i][j] = Brick();
-            brickGrid[i][j].setPosition(200.0 + (i * 90.0), 60.0 + (j * 40));
-            brickGrid[i][j].setColor(sf::Color::Cyan);
+    // Lire les données du fichier et initialiser la grille
+    for (int j = 0; j < numLigneBrick; ++j) {
+        std::getline(levelFile, line);
+
+        for (int i = 0; i < numColBrick; ++i) {
+            if (i < static_cast<int>(line.length())) {
+                int life = line[i] - '0';  // Convertir le caractère en entier
+                brickGrid[i][j] = Brick();
+                brickGrid[i][j].setPosition(200.0 + (i * 90.0), 60.0 + (j * 40.0));
+                brickGrid[i][j].setLife(life);
+                brickGrid[i][j].lifeBrick();
+            }
         }
-    }  
-    
+    }
+
+    // Fermer le fichier du niveau
+    levelFile.close();
+
     loadBorder();
 }
 

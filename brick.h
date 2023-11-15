@@ -13,5 +13,6 @@ public:
     void OnCollisionExit() override;
 
     void lifeBrick();
+    void setLife(int life);
 
 };
