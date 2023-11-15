@@ -6,7 +6,7 @@ using namespace sf;
 
 Brick::Brick() : gameObject(70, 20, 640, 360, Color::Cyan)
 {
-    life = 4;
+    
 };
 
 void Brick::OnCollisionEnter(gameObject* object)
@@ -58,4 +58,9 @@ void Brick::lifeBrick()
         isActive = false;
         setPosition(3000, 0);
     }    
+}
+
+void Brick::setLife(int life)
+{
+    this->life = life;
 }

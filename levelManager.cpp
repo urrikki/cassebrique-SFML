@@ -2,6 +2,8 @@
 
 #include <fstream>
 #include <iostream>
+#include <sstream>
+
 
 LevelManager::LevelManager(){
 
@@ -62,9 +64,31 @@ void LevelManager:: initializeFromFile(const std::string& filename) {
     std::ifstream file(filename);
 
     if (file.is_open()) {
+        int numRow, numCol;
+        int numLine = 0;
+        std::string line;
+
+        while (std::getline(file, line))
+        {
+            numRow = line.length();
+            brickGrid.resize(numRow, std::vector<Brick>(numLine));
+            std::cout << line << std::endl;
+
+            for (int i = 0; i < line.length(); ++i)
+            {
+                for (int j = 0; j < numLine; ++j) {
+                    brickGrid[i][j] = Brick();
+                    brickGrid[i][j].setLife(line[i]);
+                    brickGrid[i][j].setPosition(200.0 + (i * 90.0), 60.0 + (j * 40));
+                }
+            }
+            ++numLine;
+        }
+        /*
         std::cout << "Open file: " << filename << std::endl;
         int numRows, numCols;
         file >> numRows >> numCols;
+
 
         brickGrid.resize(numRows, std::vector<Brick>(numCols, Brick()));
 
@@ -74,7 +98,7 @@ void LevelManager:: initializeFromFile(const std::string& filename) {
                 brickGrid[i][j].setPosition(200.0 + (i * 90.0), 60.0 + (j * 40));
             }
         }
-
+        */
         file.close();
     }
     else {
