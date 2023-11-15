@@ -41,7 +41,10 @@ void Brick::OnCollisionExit()
 
 void Brick::lifeBrick()
 {
-    if (life == 3) {
+    if (life == 4) {
+        setColor(sf::Color::Cyan); // Cyan
+    }
+    else if (life == 3) {
         setColor(sf::Color(60, 250, 0)); // Green
     }
     else if (life == 2) {

@@ -1,5 +1,7 @@
 #include "levelManager.h"
 
+#include <fstream>
+#include <iostream>
 
 LevelManager::LevelManager(){
 
@@ -35,26 +37,51 @@ void LevelManager::loadBorder()
 
 }
 
-void LevelManager::loadLevel(int levelNumber) {
-    if (levelNumber == 1) {
-        // Réinitialisez ou ajustez la taille de votre grille pour le niveau 1
-        this->numColBrick = 10;
-        this->numLigneBrick = 6;
-    }
+//void LevelManager::loadLevel(int levelNumber) {
+//    if (levelNumber == 1) {
+//        // Réinitialisez ou ajustez la taille de votre grille pour le niveau 1
+//        this->numColBrick = 10;
+//        this->numLigneBrick = 6;
+//    }
+//
+//    brickGrid.resize(numColBrick, std::vector<Brick>(numLigneBrick));
+//
+//    // Repopulez la grille avec les briques
+//    for (int i = 0; i < numColBrick; ++i) {
+//        for (int j = 0; j < numLigneBrick; ++j) {
+//            brickGrid[i][j] = Brick();
+//            brickGrid[i][j].setPosition(200.0 + (i * 90.0), 60.0 + (j * 40));
+//            brickGrid[i][j].setColor(sf::Color::Cyan);
+//        }
+//    }  
+//    
+//    loadBorder();
+//}
 
-    brickGrid.resize(numColBrick, std::vector<Brick>(numLigneBrick));
+void LevelManager:: initializeFromFile(const std::string& filename) {
+    std::ifstream file(filename);
 
-    // Repopulez la grille avec les briques
-    for (int i = 0; i < numColBrick; ++i) {
-        for (int j = 0; j < numLigneBrick; ++j) {
-            brickGrid[i][j] = Brick();
-            brickGrid[i][j].setPosition(200.0 + (i * 90.0), 60.0 + (j * 40));
-            brickGrid[i][j].setColor(sf::Color::Cyan);
+    if (file.is_open()) {
+        std::cout << "Open file: " << filename << std::endl;
+        int numRows, numCols;
+        file >> numRows >> numCols;
+
+        brickGrid.resize(numRows, std::vector<Brick>(numCols, Brick()));
+
+        for (int i = 0; i < numRows; ++i) {
+            for (int j = 0; j < numCols; ++j) {
+                file >> brickGrid[i][j].life;
+                brickGrid[i][j].setPosition(200.0 + (i * 90.0), 60.0 + (j * 40));
+            }
         }
-    }  
-    
+
+        file.close();
+    }
+    else {
+        std::cout << "Unable to open file: " << filename << std::endl;
+    }
     loadBorder();
-}
+};
 
 void LevelManager::drawLevel(sf::RenderWindow& window) {
     
@@ -64,7 +91,7 @@ void LevelManager::drawLevel(sf::RenderWindow& window) {
             brickGrid[i][j].drawShape(window);     
         }
     }
-    
+
 }
 
 void LevelManager::drawBorder(sf::RenderWindow& window)
@@ -73,3 +100,5 @@ void LevelManager::drawBorder(sf::RenderWindow& window)
         borderGrid[i].drawShape(window);
     }
 }
+
+

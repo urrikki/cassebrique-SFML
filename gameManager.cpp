@@ -10,9 +10,10 @@ GameManager::GameManager() : window(sf::VideoMode(1280, 720), "SFML works!")
     nbrShoot = 0; 
     myBall.initBall();
     myCanon.rotateTowardOrigin(0.5, 0.5);
-    myLevel.loadLevel(1);
+    //myLevel.loadLevel(1);
+    myLevel.initializeFromFile("level1.txt");
     myText.addText(" Score : " + std::to_string(score), 1150, 630, sf::Color::White, 25);
-    myText.addText(" Shoot " + std::to_string(nbrShoot) +"/10", 1150, 660, sf::Color::White, 25);
+    myText.addText(" Shoot " + std::to_string(nbrShoot) +"/15", 1150, 660, sf::Color::White, 25);
 
     if (!buffer.loadFromFile("audio/background.mp3"))
     {
@@ -89,7 +90,7 @@ void GameManager::update(float elapsedTime)
         if (shot == false)
         {
             ++nbrShoot;
-            myText.setContent(1, " Shoot " + std::to_string(nbrShoot) + "/10");
+            myText.setContent(1, " Shoot " + std::to_string(nbrShoot) + "/15");
             
             myBall.setPosition(myCanon.x, myCanon.y);
             myBall.setOrientation(dx, dy);
