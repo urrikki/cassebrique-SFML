@@ -12,7 +12,9 @@ LevelManager::LevelManager(){
 
     std::vector<Border> borderGrid;
     numBorder = 3;
-      
+     
+    std::vector<Ball> ballGrid;
+    numBall = 15;
 }
 
 void LevelManager::loadBorder()
@@ -93,6 +95,16 @@ void LevelManager::loadLevel(int levelNumber) {
     levelFile.close();
 
     loadBorder();
+}
+
+void LevelManager::loadBall()
+{
+    ballGrid.resize(numBall);
+    for (int i = 0; i < numBall; ++i) {
+        ballGrid[i] = Ball();
+        ballGrid[i].isActive = false;
+        ballGrid[i].initBall();
+    }
 }
 
 void LevelManager::drawLevel(sf::RenderWindow& window) {
