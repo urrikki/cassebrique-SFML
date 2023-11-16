@@ -155,7 +155,7 @@ void GameManager::update(float elapsedTime)
 
                     if (myLevel.brickGrid[i][j].Collide == CollideType::Stay)
                     {
-                        score = score + (10 / nbrShoot);
+                        score = score + (20 / nbrShoot);
                         myText.setContent(0, " Score : " + std::to_string(score));
                     }
 
