@@ -26,6 +26,11 @@ private:
     sf::RenderWindow window;
     sf::Clock clock;
     sf::SoundBuffer buffer;
+    std::vector<Border> borderGrid;
+    int numBorder = 3;
+
+    void loadBorder();
+    void drawBorder(sf::RenderWindow& window);
 
     bool click = false;
     bool shot = true;

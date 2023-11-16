@@ -15,10 +15,12 @@ GameManager::GameManager() : window(sf::VideoMode(1280, 720), "SFML works!")
     myText.addText(" Score : " + std::to_string(score), 1150, 630, sf::Color::White, 25);
     myText.addText(" Shoot " + std::to_string(nbrShoot) + "/" + std::to_string(myLevel.numBall), 1150, 660, sf::Color::White, 25);
     myLevel.loadBall();
+    loadBorder();
     if (!buffer.loadFromFile("audio/background.mp3"))
     {
         std::cout << "Erreur lors du chargement du son." << std::endl;
     }
+    
 
 }
 
@@ -167,9 +169,9 @@ void GameManager::update(float elapsedTime)
             }
 
 
-            for (int i = 0; i < myLevel.numBorder; ++i)
+            for (int i = 0; i < numBorder; ++i)
             {
-                myLevel.ballGrid[k].getCollideSide(&myLevel.borderGrid[i]);
+                myLevel.ballGrid[k].getCollideSide(&borderGrid[i]);
             }
 
 
@@ -190,7 +192,7 @@ void GameManager::update(float elapsedTime)
 void GameManager::draw()
 {
     window.clear();
-
+    drawBorder(window);
     myLevel.drawLevel(window);
     for (int i = 0; i < myLevel.numBall; ++i)
     {
@@ -202,3 +204,31 @@ void GameManager::draw()
     window.display();
 }
 
+void GameManager::drawBorder(sf::RenderWindow& window)
+{
+    for (int i = 0; i < numBorder; ++i) {
+        borderGrid[i].drawShape(window);
+    }
+}
+
+void GameManager::loadBorder()
+{
+    borderGrid.resize(numBorder);
+
+    //Repopulez les borders
+    borderGrid[0] = Border();
+    borderGrid[0].setPosition(145, 0);
+    borderGrid[0].setSizeRec(995, 15);
+    borderGrid[0].setColor(sf::Color(180, 180, 200));
+
+    borderGrid[1] = Border();
+    borderGrid[1].setPosition(145, 15);
+    borderGrid[1].setSizeRec(20, 700);
+    borderGrid[1].setColor(sf::Color(180, 180, 200));
+
+    borderGrid[2] = Border();
+    borderGrid[2].setPosition(1120, 15);
+    borderGrid[2].setSizeRec(20, 700);
+    borderGrid[2].setColor(sf::Color(180, 180, 200));
+
+}
