@@ -10,7 +10,7 @@ class LevelManager {
 public:
     LevelManager();
 
-    void loadLevel(int levelNumber);
+    void loadLevel();
     void drawLevel(sf::RenderWindow& window);
 
     std::vector<std::vector<Brick>> brickGrid;
@@ -25,4 +25,6 @@ public:
     std::vector<Ball> ballGrid;
     int numBall;
     void loadBall();
+
+    int nbrLevel;
 };

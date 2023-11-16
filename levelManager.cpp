@@ -15,6 +15,8 @@ LevelManager::LevelManager(){
      
     std::vector<Ball> ballGrid;
     numBall = 15;
+
+    nbrLevel = 1;
 }
 
 void LevelManager::loadBorder()
@@ -39,12 +41,12 @@ void LevelManager::loadBorder()
 
 }
 
-void LevelManager::loadLevel(int levelNumber) {
+void LevelManager::loadLevel() {
     // Construire le chemin du dossier des niveaux
     std::string levelFolderPath = "level/";
 
     // Construire le nom du fichier texte du niveau
-    std::string levelFileName = levelFolderPath + "level" + std::to_string(levelNumber) + ".txt";
+    std::string levelFileName = levelFolderPath + "level" + std::to_string(nbrLevel) + ".txt";
 
     // Ouvrir le fichier texte du niveau
     std::ifstream levelFile(levelFileName);

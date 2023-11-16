@@ -217,19 +217,19 @@ CollideSide gameObject::getCollideSide(gameObject* objectTest) {
 
             Collide = Enter;
             if (testDistance == "rtol") {
-                std::cout << "Right";
+                
                 return Right;
             }
             else if (testDistance == "ltor") {
-                std::cout << "Left";
+                
                 return Left;
             }
             else if (testDistance == "ttob") {
-                std::cout << "Top";
+               
                 return Top;
             }
             else if (testDistance == "btot") {
-                std::cout << "Bot";
+                
                 return Bottom;
             }
         }

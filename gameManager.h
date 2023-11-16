@@ -28,12 +28,14 @@ private:
     sf::SoundBuffer buffer;
 
     bool click = false;
-    bool shot = false;
+    bool shot = true;
     float elapsedTime = 0.0;
     bool print = false;
 
     int score; // ???? init à 0 ici ????
     int nbrShoot;
+
+    bool levelFinish();
 
     Brick myBrick;
     Ball myBall;
