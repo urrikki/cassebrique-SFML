@@ -70,19 +70,21 @@ void LevelManager:: initializeFromFile(const std::string& filename) {
 
         while (std::getline(file, line))
         {
-            numRow = line.length();
-            brickGrid.resize(numRow, std::vector<Brick>(numLine));
-            std::cout << line << std::endl;
-
-            for (int i = 0; i < line.length(); ++i)
-            {
-                for (int j = 0; j < numLine; ++j) {
-                    brickGrid[i][j] = Brick();
-                    brickGrid[i][j].setLife(line[i]);
-                    brickGrid[i][j].setPosition(200.0 + (i * 90.0), 60.0 + (j * 40));
-                }
-            }
             ++numLine;
+            if (numLine == 0) {
+                numCol = line.length();
+                brickGrid.resize(numCol, std::vector<Brick>(0));
+            }
+            std::cout << line << std::endl;
+            brickGrid.resize(numCol, std::vector<Brick>(numLine + 1));
+
+        }
+        for (int i = 0; i < line.length(); ++i)
+        {
+            std::getline(file, line);
+            brickGrid[i][numLine] = Brick();
+            brickGrid[i][numLine].setLife(line[i]);
+            brickGrid[i][numLine].setPosition(200.0 + (i * 90.0), 60.0 + (numLine * 40));
         }
         /*
         std::cout << "Open file: " << filename << std::endl;
