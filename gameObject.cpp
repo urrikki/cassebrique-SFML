@@ -168,8 +168,7 @@ void gameObject::move(float elapsedTimeF)
 
 
 CollideSide gameObject::getCollideSide(gameObject* objectTest) {
-    // xmin = x et xmax = x + size
-    // ymin = y et ymax = y + size
+
     if (isActive == true && objectTest->isActive == true)
     {
         if (getShapeType() == ShapeType::Circle)
@@ -204,7 +203,7 @@ CollideSide gameObject::getCollideSide(gameObject* objectTest) {
                 distanceResult("btot", std::abs(y + h - objectTest->y))
             };
 
-            // petite distance
+            // Petite distance
             float minDistance = results[0].value;
             std::string testDistance = results[0].name;
 
@@ -238,20 +237,6 @@ CollideSide gameObject::getCollideSide(gameObject* objectTest) {
     }
 }
 
-// Rotation
-void gameObject::rotateTowardOrigin(float x, float y)
-{
-    float newX = this->w * x;
-    float newY = this->h * y;
-    shape->setOrigin(newX, newY);
-}
-
-void gameObject::setRotation(float angle)
-{
-    this->angle = angle;
-    shape->setRotation(angle);
-};
-
 void gameObject::OnCollisionEnter(gameObject* object)
 {
 
@@ -266,6 +251,22 @@ void gameObject::OnCollisionExit()
 {
 
 }
+
+// Rotation
+void gameObject::rotateTowardOrigin(float x, float y)
+{
+    float newX = this->w * x;
+    float newY = this->h * y;
+    shape->setOrigin(newX, newY);
+}
+
+void gameObject::setRotation(float angle)
+{
+    this->angle = angle;
+    shape->setRotation(angle);
+};
+
+
 
 bool gameObject::isShapeOnScreen(sf::RenderWindow& window)
 {
