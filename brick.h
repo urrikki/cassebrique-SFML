@@ -8,8 +8,7 @@ public:
 
     Brick();
 
-    void OnCollisionEnter(gameObject* object) override;
-    void OnCollisionStay() override;
+    void OnCollisionEnter() override;
     void OnCollisionExit() override;
 
     void lifeBrick();

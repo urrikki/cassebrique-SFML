@@ -36,7 +36,7 @@ gameObject::gameObject(int w, int h, float x, float y, sf::Color color)
     shape->setFillColor(m_color);
 
     Collide = NoCollide;
-
+    sideForRebound = None;
     isActive = true;
 }
 
@@ -58,6 +58,7 @@ gameObject::gameObject(float r, float x, float y, sf::Color color)
 
     Collide = NoCollide;
     isActive = true;
+    sideForRebound = None;
 }
 
 
@@ -216,26 +217,40 @@ CollideSide gameObject::getCollideSide(gameObject* objectTest) {
             }
 
             Collide = Enter;
+            objectTest->Collide = Enter;
+
             if (testDistance == "rtol") {
-                
+                sideForRebound = Right;
+                manageCollide();
+                objectTest->manageCollide();
                 return Right;
             }
             else if (testDistance == "ltor") {
-                
+                sideForRebound = Left;
+                manageCollide();
+                objectTest->manageCollide();
                 return Left;
             }
             else if (testDistance == "ttob") {
-               
+                sideForRebound = Top;
+                manageCollide();
+                objectTest->manageCollide();
                 return Top;
             }
             else if (testDistance == "btot") {
-                
+                sideForRebound = Bottom;
+                manageCollide();
+                objectTest->manageCollide();
                 return Bottom;
             }
         }
 
         return CollideSide::None;
     }
+}
+
+bool gameObject::operator==(const gameObject& other) const {
+    return (x == other.x && y == other.y && w == other.w && h == other.h || r == other.r);
 }
 
 // Rotation
@@ -252,19 +267,36 @@ void gameObject::setRotation(float angle)
     shape->setRotation(angle);
 };
 
-void gameObject::OnCollisionEnter(gameObject* object)
-{
+void gameObject::manageCollide()
+{  
+    OnCollisionEnter();
+    OnCollisionStay();
+    OnCollisionExit();
+}
 
+void gameObject::OnCollisionEnter()
+{
+    if (Collide == Enter) {
+        Collide = Stay;
+        beCollide.push_back(*this);
+    }
 }
 
 void gameObject::OnCollisionStay()
 {
-
+    if (Collide == Stay) {
+        if (true)
+        {
+            Collide = Exit;
+        }
+    }
 }
 
 void gameObject::OnCollisionExit()
 {
-
+    if (Collide == Exit) {
+        beCollide.erase(std::remove(beCollide.begin(), beCollide.end(), *this), beCollide.end());
+    }
 }
 
 bool gameObject::isShapeOnScreen(sf::RenderWindow& window)

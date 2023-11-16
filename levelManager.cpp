@@ -19,6 +19,12 @@ LevelManager::LevelManager(){
     nbrLevel = 1;
 }
 
+LevelManager::~LevelManager() {
+    brickGrid.clear();
+    borderGrid.clear();
+    ballGrid.clear();
+}
+
 void LevelManager::loadBorder()
 {
     borderGrid.resize(numBorder);
@@ -42,15 +48,12 @@ void LevelManager::loadBorder()
 }
 
 void LevelManager::loadLevel() {
-    // Construire le chemin du dossier des niveaux
-    std::string levelFolderPath = "level/";
 
-    // Construire le nom du fichier texte du niveau
+    std::string levelFolderPath = "level/";
     std::string levelFileName = levelFolderPath + "level" + std::to_string(nbrLevel) + ".txt";
 
     // Ouvrir le fichier texte du niveau
     std::ifstream levelFile(levelFileName);
-
     if (!levelFile.is_open()) {
         std::cerr << "Impossible d'ouvrir le fichier du niveau : " << levelFileName << std::endl;
         return;
@@ -60,12 +63,8 @@ void LevelManager::loadLevel() {
     numColBrick = 0;
     numLigneBrick = 0;
     std::string line;
-
     while (std::getline(levelFile, line)) {
-        // Incrementer le nombre de lignes pour chaque ligne lue
         ++numLigneBrick;
-
-        // Mettre à jour le nombre de colonnes si la ligne est plus longue que numColBrick actuel
         if (line.length() > static_cast<size_t>(numColBrick)) {
             numColBrick = static_cast<int>(line.length());
         }
@@ -75,7 +74,6 @@ void LevelManager::loadLevel() {
     levelFile.clear();
     levelFile.seekg(0, std::ios::beg);
 
-    // Allouer de l'espace pour la grille en fonction du nombre de colonnes et de lignes déterminé
     brickGrid.resize(numColBrick, std::vector<Brick>(numLigneBrick));
 
     // Lire les données du fichier et initialiser la grille
@@ -93,7 +91,6 @@ void LevelManager::loadLevel() {
         }
     }
 
-    // Fermer le fichier du niveau
     levelFile.close();
 
     loadBorder();

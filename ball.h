@@ -8,9 +8,7 @@ public:
 
     void initBall();
 
-    void OnCollisionEnter(gameObject* object) override;
-    void OnCollisionStay() override;
-    void OnCollisionExit() override;
+    void OnCollisionEnter() override;
 
     void rebound(CollideSide side);
 

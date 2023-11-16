@@ -42,6 +42,7 @@ void GameManager::runGame()
             myText.setContent(1, " Shoot " + std::to_string(nbrShoot) + "/" + std::to_string(myLevel.numBall));
         }
     }
+    myLevel.~LevelManager();
 }
 
 bool GameManager::levelFinish()
@@ -93,6 +94,7 @@ void GameManager::processEvents()
 
 void GameManager::update(float elapsedTime)
 {
+    myText.setContent(0, " Score : " + std::to_string(score));
     sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
     float dx = mousePosition.x - myCanon.x;
@@ -150,38 +152,22 @@ void GameManager::update(float elapsedTime)
             {
                 for (int j = 0; j < myLevel.numLigneBrick; ++j) {
 
-                    myLevel.brickGrid[i][j].OnCollisionEnter(&myLevel.ballGrid[k]);
-                    myLevel.ballGrid[k].OnCollisionEnter(&myLevel.brickGrid[i][j]);
-
-                    if (myLevel.brickGrid[i][j].Collide == CollideType::Stay)
+                    if (myLevel.ballGrid[k].getCollideSide(&myLevel.brickGrid[i][j]) != CollideSide::None)
                     {
-                        score = score + (10 / nbrShoot);
-                        myText.setContent(0, " Score : " + std::to_string(score));
-                    }
-
-                    myLevel.brickGrid[i][j].OnCollisionStay();
-                    myLevel.ballGrid[k].OnCollisionStay();
-                    if (myLevel.brickGrid[i][j].Collide == CollideType::Exit)
-                    {
+                        score = score + (nbrShoot + 5 / nbrShoot);  
                         if (myLevel.brickGrid[i][j].life == 0)
                         {
                             score = score + (100 / nbrShoot);
-                            myText.setContent(0, " Score : " + std::to_string(score));
                         }
                     }
-
-
-                    myLevel.brickGrid[i][j].OnCollisionExit();
-                    myLevel.ballGrid[k].OnCollisionExit();
+                    
                 }
             }
 
 
             for (int i = 0; i < myLevel.numBorder; ++i)
             {
-                myLevel.ballGrid[k].OnCollisionEnter(&myLevel.borderGrid[i]);
-                myLevel.ballGrid[k].OnCollisionStay();
-                myLevel.ballGrid[k].OnCollisionExit();
+                myLevel.ballGrid[k].getCollideSide(&myLevel.borderGrid[i]);
             }
 
 

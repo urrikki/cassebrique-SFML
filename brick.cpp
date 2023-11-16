@@ -9,24 +9,12 @@ Brick::Brick() : gameObject(70, 20, 640, 360, Color::Cyan)
     life = 4;
 };
 
-void Brick::OnCollisionEnter(gameObject* object)
+void Brick::OnCollisionEnter()
 {
-    getCollideSide(object);
     if (Collide == CollideType::Enter)
     {
         this->life = life - 1;
         Collide = Stay;
-    }
-}
-
-void Brick::OnCollisionStay()
-{
-    while (Collide == CollideType::Stay)
-    {
-        if (true)
-        {
-            Collide = Exit;
-        }
     }
 }
 

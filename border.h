@@ -7,7 +7,5 @@ public:
 
     Border();
 
-    void OnCollisionEnter(gameObject* object) override;
-    void OnCollisionStay() override;
-    void OnCollisionExit() override;
+  
 };

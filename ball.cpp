@@ -12,37 +12,14 @@ void Ball::initBall()
 };
 
 
-void Ball::OnCollisionEnter(gameObject* object)
+void Ball::OnCollisionEnter()
 {
-    CollideSide side = getCollideSide(object);
     if (Collide == CollideType::Enter)
     {
-        
-        rebound(side);
-        
-        
+        rebound(sideForRebound);
         Collide = Stay;
     }
     
-}
-
-void Ball::OnCollisionStay()
-{
-    while (Collide == CollideType::Stay)
-    {
-        if (true)
-        {
-            Collide = Exit;
-        }
-    }
-}
-
-void Ball::OnCollisionExit()
-{
-    if (Collide == CollideType::Exit)
-    {
-        Collide = NoCollide;
-    }
 }
 
 void Ball::rebound(CollideSide side)
@@ -55,4 +32,5 @@ void Ball::rebound(CollideSide side)
     {
         this->orientationX = orientationX * -1;
     }
+    side = None;
 }

@@ -14,9 +14,8 @@ void Test::initTest()
 	setSpeed(100);
 };
 
-void Test::OnCollisionEnter(gameObject* object)
+void Test::OnCollisionEnter()
 {
-	getCollideSide(object);
 }
 
 void Test::OnCollisionStay()
