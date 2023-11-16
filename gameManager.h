@@ -1,14 +1,14 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <string>
-
 #include "levelManager.h"
 #include "textManager.h"
 #include "brick.h" 
 #include "ball.h"
 #include "canon.h"
 #include "test.h"
+
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
 
 class GameManager
 {

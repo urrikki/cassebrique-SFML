@@ -1,4 +1,5 @@
 #include "brick.h"
+
 #include <vector>
 #include<iostream>
 
