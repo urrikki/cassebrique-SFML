@@ -1,8 +1,10 @@
 #define _USE_MATH_DEFINES
 
 #include "gameManager.h"
+
 #include<iostream>
 #include <cmath>
+#include <string>
 
 GameManager::GameManager() : window(sf::VideoMode(1280, 720), "SFML works!")
 {

@@ -1,11 +1,11 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <vector>
 #include "brick.h"
 #include "border.h"
 #include "ball.h"
 
+#include <SFML/Graphics.hpp>
+#include <vector>
 class LevelManager {
 public:
     LevelManager();
