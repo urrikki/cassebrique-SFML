@@ -36,7 +36,7 @@ gameObject::gameObject(int w, int h, float x, float y, sf::Color color)
     shape->setFillColor(m_color);
 
     Collide = NoCollide;
-
+    sideForRebound = None;
     isActive = true;
 }
 
@@ -58,6 +58,7 @@ gameObject::gameObject(float r, float x, float y, sf::Color color)
 
     Collide = NoCollide;
     isActive = true;
+    sideForRebound = None;
 }
 
 
@@ -128,7 +129,7 @@ void gameObject::drawShape(RenderWindow& window)
     if (isActive == true)
     {
         window.draw(*shape);
-    }  
+    }
 };
 
 ShapeType gameObject::getShapeType()
@@ -166,10 +167,8 @@ void gameObject::move(float elapsedTimeF)
     setPosition(newX, newY);
 }
 
-
-CollideSide gameObject::getCollideSide(gameObject* objectTest) {
-    // xmin = x et xmax = x + size
-    // ymin = y et ymax = y + size
+bool gameObject::getCollide(gameObject* objectTest)
+{
     if (isActive == true && objectTest->isActive == true)
     {
         if (getShapeType() == ShapeType::Circle)
@@ -195,47 +194,60 @@ CollideSide gameObject::getCollideSide(gameObject* objectTest) {
             /*verif pour y*/ (objectTest->y >= y && objectTest->y <= (y + h) || objectTest->y + objectTest->h >= y && objectTest->y + objectTest->h <= (y + h))
             )
         {
-
-            // Stock résultats dans la structure       
-            distanceResult results[] = {
-                distanceResult("rtol", std::abs(x + w - objectTest->x)),
-                distanceResult("ltor", std::abs(x - objectTest->x - objectTest->w)),
-                distanceResult("ttob", std::abs(y - objectTest->y - objectTest->h)),
-                distanceResult("btot", std::abs(y + h - objectTest->y))
-            };
-
-            // petite distance
-            float minDistance = results[0].value;
-            std::string testDistance = results[0].name;
-
-            for (int i = 1; i < 4; i++) {
-                if (results[i].value < minDistance) {
-                    minDistance = results[i].value;
-                    testDistance = results[i].name;
-                }
-            }
-
-            Collide = Enter;
-            if (testDistance == "rtol") {
-                std::cout << "Right";
-                return Right;
-            }
-            else if (testDistance == "ltor") {
-                std::cout << "Left";
-                return Left;
-            }
-            else if (testDistance == "ttob") {
-                std::cout << "Top";
-                return Top;
-            }
-            else if (testDistance == "btot") {
-                std::cout << "Bot";
-                return Bottom;
-            }
+            return true;
         }
+    }
+    return false;
+}
 
+CollideSide gameObject::getCollideSide(gameObject* objectTest) {
+    if (!isActive || !objectTest->isActive) {
         return CollideSide::None;
     }
+
+    float thisW = (getShapeType() == ShapeType::Circle) ? r : w;
+    float thisH = (getShapeType() == ShapeType::Circle) ? r : h;
+
+    float objTestW = (objectTest->getShapeType() == ShapeType::Circle) ? objectTest->r : objectTest->w;
+    float objTestH = (objectTest->getShapeType() == ShapeType::Circle) ? objectTest->r : objectTest->h;
+
+    // Stocker les résultats dans la structure
+    distanceResult results[] = {
+        distanceResult("rtol", x + thisW - objectTest->x),
+        distanceResult("ltor", objectTest->x + objTestW - x),
+        distanceResult("ttob", objectTest->y + objTestH - y),
+        distanceResult("btot", y + thisH - objectTest->y)
+    };
+
+    // Petite distance
+    float minDistance = results[0].value;
+    std::string testDistance = results[0].name;
+
+    for (int i = 1; i < 4; i++) {
+        if (results[i].value < minDistance) {
+            minDistance = results[i].value;
+            testDistance = results[i].name;
+        }
+    }
+
+    if (testDistance == "rtol" && minDistance >= 0 && minDistance <= objTestW) {
+        return CollideSide::Right;
+    }
+    else if (testDistance == "ltor" && minDistance >= 0 && minDistance <= thisW) {
+        return CollideSide::Left;
+    }
+    else if (testDistance == "ttob" && minDistance >= 0 && minDistance <= objTestH) {
+        return CollideSide::Top;
+    }
+    else if (testDistance == "btot" && minDistance >= 0 && minDistance <= thisH) {
+        return CollideSide::Bottom;
+    }
+
+    return CollideSide::None;
+}
+
+bool gameObject::operator==(const gameObject& other) const {
+    return (x == other.x && y == other.y && w == other.w && h == other.h || r == other.r);
 }
 
 // Rotation
@@ -252,17 +264,49 @@ void gameObject::setRotation(float angle)
     shape->setRotation(angle);
 };
 
+void gameObject::manageCollide(gameObject* objectTest)
+{
+    bool bHasCollision = getCollide(objectTest);
+    if (bHasCollision)
+    {
+        if (bAlreadyHasCollision)
+        {
+            OnCollisionStay(objectTest);
+        }
+        else
+        {
+            //beCollide.push_back(*objectTest);
+            OnCollisionEnter(objectTest);
+            bAlreadyHasCollision = true;
+        }
+    }
+    else
+    {
+        if (bAlreadyHasCollision)
+        {
+            /*auto it = std::remove_if(beCollide.begin(), beCollide.end(),
+                [objectTest](const gameObject& obj) { return &obj == objectTest; });
+
+            beCollide.erase(it, beCollide.end());
+            beCollide.shrink_to_fit();*/
+            OnCollisionExit(objectTest);
+            bAlreadyHasCollision = false;
+
+        }
+    }
+}
+
 void gameObject::OnCollisionEnter(gameObject* object)
 {
 
 }
 
-void gameObject::OnCollisionStay()
+void gameObject::OnCollisionStay(gameObject* object)
 {
 
 }
 
-void gameObject::OnCollisionExit()
+void gameObject::OnCollisionExit(gameObject* object)
 {
 
 }

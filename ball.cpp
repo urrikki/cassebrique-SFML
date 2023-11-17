@@ -1,9 +1,10 @@
 #include "ball.h"
+
 #include <vector>
 
 using namespace sf;
 
-Ball::Ball() : gameObject(4, 1300, 600, Color(220,150,30))
+Ball::Ball() : gameObject(4, 1300, 600, Color(220, 150, 30))
 {};
 
 void Ball::initBall()
@@ -14,39 +15,12 @@ void Ball::initBall()
 
 void Ball::OnCollisionEnter(gameObject* object)
 {
-    CollideSide side = getCollideSide(object);
-    if (Collide == CollideType::Enter)
-    {
-        
-        rebound(side);
-        
-        
-        Collide = Stay;
-    }
-    
-}
-
-void Ball::OnCollisionStay()
-{
-    while (Collide == CollideType::Stay)
-    {
-        if (true)
-        {
-            Collide = Exit;
-        }
-    }
-}
-
-void Ball::OnCollisionExit()
-{
-    if (Collide == CollideType::Exit)
-    {
-        Collide = NoCollide;
-    }
+    rebound(getCollideSide(object));
 }
 
 void Ball::rebound(CollideSide side)
 {
+
     if (side == CollideSide::Bottom || side == CollideSide::Top)
     {
         this->orientationY = orientationY * -1;

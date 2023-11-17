@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics/Color.hpp>
+#include <vector>
 
 typedef enum CollideType
 {
@@ -39,6 +40,8 @@ class gameObject
 private:
     float dx;
     float dy;
+    std::vector<gameObject> beCollide;
+    bool bAlreadyHasCollision = false; //
 
 public:
     gameObject(int w, int h, float x, float y, sf::Color color);
@@ -75,6 +78,7 @@ public:
 
     void drawShape(sf::RenderWindow& window);
 
+    bool getCollide(gameObject* objectTest);
     CollideSide getCollideSide(gameObject* objectTest);
 
     ShapeType getShapeType();
@@ -93,13 +97,19 @@ public:
     void setRotation(float angle);
 
     virtual void OnCollisionEnter(gameObject* object);
-    virtual void OnCollisionStay();
-    virtual void OnCollisionExit();
+    virtual void OnCollisionStay(gameObject* object);
+    virtual void OnCollisionExit(gameObject* object);
 
     bool isShapeOnScreen(sf::RenderWindow& window);
 
     void setSizeRec(int w, int h);
 
     void setSizeCir(float r);
+
+    CollideSide sideForRebound;
+
+    bool operator==(const gameObject& other) const;
+
+    void manageCollide(gameObject* objectTest);
 
 };

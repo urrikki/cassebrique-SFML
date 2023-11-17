@@ -1,4 +1,5 @@
 #include "test.h"
+
 #include <vector>
 #include<iostream>
 
@@ -6,7 +7,7 @@ using namespace sf;
 
 Test::Test() : gameObject(80, 30, 100, 100, Color::Magenta)
 {
-	
+
 };
 
 void Test::initTest()
@@ -14,17 +15,6 @@ void Test::initTest()
 	setSpeed(100);
 };
 
-void Test::OnCollisionEnter(gameObject* object)
+void Test::OnCollisionEnter(gameObject* objectTest)
 {
-	getCollideSide(object);
-}
-
-void Test::OnCollisionStay()
-{
-
-}
-
-void Test::OnCollisionExit()
-{
-
 }

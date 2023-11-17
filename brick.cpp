@@ -1,4 +1,5 @@
 #include "brick.h"
+
 #include <vector>
 #include<iostream>
 
@@ -9,39 +10,29 @@ Brick::Brick() : gameObject(70, 20, 640, 360, Color::Cyan)
     life = 4;
 };
 
-void Brick::OnCollisionEnter(gameObject* object)
+void Brick::OnCollisionEnter(gameObject* objectTest)
 {
-    getCollideSide(object);
-    if (Collide == CollideType::Enter)
-    {
-        this->life = life - 1;
-        Collide = Stay;
-    }
+
+    this->life = life - 1;
+    Collide = Stay;
+
 }
 
-void Brick::OnCollisionStay()
+void Brick::OnCollisionExit(gameObject* objectTest)
 {
-    while (Collide == CollideType::Stay)
-    {
-        if (true)
-        {
-            Collide = Exit;
-        }
-    }
-}
 
-void Brick::OnCollisionExit()
-{
-    if (Collide == CollideType::Exit)
-    {
-        lifeBrick();
-        Collide = NoCollide;
-    }
+    lifeBrick();
+    Collide = NoCollide;
+
 }
 
 void Brick::lifeBrick()
 {
-    if (life == 3) {
+    if (life == 4)
+    {
+        setColor(sf::Color::Cyan); // Cyan
+    }
+    else if (life == 3) {
         setColor(sf::Color(60, 250, 0)); // Green
     }
     else if (life == 2) {
@@ -54,5 +45,9 @@ void Brick::lifeBrick()
     {
         isActive = false;
         setPosition(3000, 0);
-    }    
+    }
+}
+
+void Brick::setLife(int life) {
+    this->life = life;
 }

@@ -1,23 +1,27 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <vector>
 #include "brick.h"
 #include "border.h"
+#include "ball.h"
 
+#include <SFML/Graphics.hpp>
+#include <vector>
 class LevelManager {
 public:
     LevelManager();
+    ~LevelManager();
 
-    void loadLevel(int levelNumber);
+    void loadLevel();
     void drawLevel(sf::RenderWindow& window);
+
+    void loadBall();
 
     std::vector<std::vector<Brick>> brickGrid;
     int numColBrick;
     int numLigneBrick;
 
-    void loadBorder();
-    std::vector<Border> borderGrid;
-    int numBorder;
-    void drawBorder(sf::RenderWindow& window);
+    std::vector<Ball> ballGrid;
+    int numBall;
+
+    int nbrLevel;
 };
