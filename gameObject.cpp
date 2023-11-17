@@ -124,14 +124,6 @@ float gameObject::getRadius()
 };
 
 
-void gameObject::drawShape(RenderWindow& window)
-{
-    if (isActive == true)
-    {
-        window.draw(*shape);
-    }
-};
-
 ShapeType gameObject::getShapeType()
 {
     return shapeType;
@@ -143,6 +135,7 @@ struct distanceResult {
 
     distanceResult(const std::string& n, float v) : name(n), value(v) {}
 };
+
 
 void gameObject::setOrientation(float x, float y)
 {
@@ -160,12 +153,17 @@ float gameObject::getOrientationY()
     return orientationY;
 }
 
+// --Move
+
 void gameObject::move(float elapsedTimeF)
 {
     float newX = x + (speed * (elapsedTimeF * orientationX));
     float newY = y + (speed * (elapsedTimeF * orientationY));
     setPosition(newX, newY);
 }
+
+
+// --Collision
 
 bool gameObject::getCollide(gameObject* objectTest)
 {
@@ -250,19 +248,6 @@ bool gameObject::operator==(const gameObject& other) const {
     return (x == other.x && y == other.y && w == other.w && h == other.h || r == other.r);
 }
 
-// Rotation
-void gameObject::rotateTowardOrigin(float x, float y)
-{
-    float newX = this->w * x;
-    float newY = this->h * y;
-    shape->setOrigin(newX, newY);
-}
-
-void gameObject::setRotation(float angle)
-{
-    this->angle = angle;
-    shape->setRotation(angle);
-};
 
 void gameObject::manageCollide(gameObject* objectTest)
 {
@@ -333,3 +318,26 @@ bool gameObject::isShapeOnScreen(sf::RenderWindow& window)
         return false;
     }
 }
+
+// --Rotation
+void gameObject::rotateTowardOrigin(float x, float y)
+{
+    float newX = this->w * x;
+    float newY = this->h * y;
+    shape->setOrigin(newX, newY);
+}
+
+void gameObject::setRotation(float angle)
+{
+    this->angle = angle;
+    shape->setRotation(angle);
+};
+
+// --Draw
+void gameObject::drawShape(RenderWindow& window)
+{
+    if (isActive == true)
+    {
+        window.draw(*shape);
+    }
+};
