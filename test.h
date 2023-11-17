@@ -8,7 +8,6 @@ public:
     Test();
     void initTest();
 
-    void OnCollisionEnter() override;
-    void OnCollisionStay();
-    void OnCollisionExit();
+    void OnCollisionEnter(gameObject* objectTest) override;
+
 };

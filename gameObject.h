@@ -41,7 +41,7 @@ private:
     float dx;
     float dy;
     std::vector<gameObject> beCollide;
-    void manageCollide();
+    bool bAlreadyHasCollision = false; //
 
 public:
     gameObject(int w, int h, float x, float y, sf::Color color);
@@ -78,6 +78,7 @@ public:
 
     void drawShape(sf::RenderWindow& window);
 
+    bool getCollide(gameObject* objectTest);
     CollideSide getCollideSide(gameObject* objectTest);
 
     ShapeType getShapeType();
@@ -95,9 +96,9 @@ public:
     void rotateTowardOrigin(float x, float y);
     void setRotation(float angle);
 
-    virtual void OnCollisionEnter();
-    virtual void OnCollisionStay();
-    virtual void OnCollisionExit();
+    virtual void OnCollisionEnter(gameObject* object);
+    virtual void OnCollisionStay(gameObject* object);
+    virtual void OnCollisionExit(gameObject* object);
 
     bool isShapeOnScreen(sf::RenderWindow& window);
 
@@ -108,5 +109,7 @@ public:
     CollideSide sideForRebound;
 
     bool operator==(const gameObject& other) const;
+
+    void manageCollide(gameObject* objectTest);
 
 };

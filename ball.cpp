@@ -4,7 +4,7 @@
 
 using namespace sf;
 
-Ball::Ball() : gameObject(4, 1300, 600, Color(220,150,30))
+Ball::Ball() : gameObject(4, 1300, 600, Color(220, 150, 30))
 {};
 
 void Ball::initBall()
@@ -13,18 +13,14 @@ void Ball::initBall()
 };
 
 
-void Ball::OnCollisionEnter()
+void Ball::OnCollisionEnter(gameObject* object)
 {
-    if (Collide == CollideType::Enter)
-    {
-        rebound(sideForRebound);
-        Collide = Stay;
-    }
-    
+    rebound(getCollideSide(object));
 }
 
 void Ball::rebound(CollideSide side)
 {
+
     if (side == CollideSide::Bottom || side == CollideSide::Top)
     {
         this->orientationY = orientationY * -1;
@@ -33,5 +29,4 @@ void Ball::rebound(CollideSide side)
     {
         this->orientationX = orientationX * -1;
     }
-    side = None;
 }

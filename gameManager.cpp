@@ -20,7 +20,7 @@ GameManager::GameManager() : window(sf::VideoMode(1280, 720), "SFML works!")
     {
         std::cout << "Erreur lors du chargement du son." << std::endl;
     }
-    
+
 
 }
 
@@ -60,7 +60,7 @@ bool GameManager::levelFinish()
                 return false;
             }
         }
-        return true;   
+        return true;
     }
     return false;
 }
@@ -84,7 +84,7 @@ void GameManager::processEvents()
                         {
                             click = true;
                             myLevel.ballGrid[nbrShoot].isActive = true;
-                        }    
+                        }
                     }
                 }
             }
@@ -142,7 +142,7 @@ void GameManager::update(float elapsedTime)
             {
                 shot = false;
             }
-        }    
+        }
     }
 
     for (int k = 0; k < myLevel.numBall; ++k)
@@ -156,28 +156,31 @@ void GameManager::update(float elapsedTime)
             {
                 for (int j = 0; j < myLevel.numLigneBrick; ++j) {
 
-                    if (myLevel.ballGrid[k].getCollideSide(&myLevel.brickGrid[i][j]) != CollideSide::None)
+                    if (myLevel.ballGrid[k].getCollide(&myLevel.brickGrid[i][j]) != false)
                     {
-                        score = score + (nbrShoot + 5 / nbrShoot);  
+
+                        score = score + (nbrShoot + 5 / nbrShoot);
                         if (myLevel.brickGrid[i][j].life == 0)
                         {
                             score = score + (100 / nbrShoot);
                         }
                     }
-                    
+
+                    myLevel.brickGrid[i][j].manageCollide(&myLevel.ballGrid[k]);
+                    myLevel.ballGrid[k].manageCollide(&myLevel.brickGrid[i][j]);
                 }
             }
 
 
+
             for (int i = 0; i < numBorder; ++i)
             {
-                myLevel.ballGrid[k].getCollideSide(&borderGrid[i]);
+                myLevel.ballGrid[k].manageCollide(&borderGrid[i]);
             }
 
 
             if (myLevel.ballGrid[k].isShapeOnScreen(window) == false)
             {
-                myLevel.ballGrid[k].setPosition(myCanon.x, myCanon.y);
                 click = false;
                 myLevel.ballGrid[k].isActive = false;
                 if (myLevel.nbrLevel == 2)
